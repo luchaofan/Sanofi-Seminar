@@ -1,0 +1,155 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>投票列表</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <script src="../Scripts/jquery-1.8.2.min.js"></script>
+    <script src="../Scripts/layer/layer.js"></script>
+    <script src="../Scripts/public.js"></script>
+    <script type="text/javascript">
+        var mid;
+        //加载标题图片
+        function InitImg() {
+            mid = GetQueryString("mid");
+            layer.load(2);
+            $.ajax({
+                url: "../WebService/WebService.asmx/GetMeetingById",
+                type: "post",
+                data: { mid: mid },
+                success: function (r) {
+                    $(".top img").attr("src", "Images/" + r.mhd_img);
+                    layer.closeAll('loading');
+                },
+                error: function (r) {
+                    console.log(r.responseText);
+                }
+            });
+        }
+
+        $(function () {
+            IsExistSession();
+            //加载图片
+            InitImg();
+            Load();
+        });
+
+
+        function Load() {
+            layer.load(2);
+            $.ajax({
+                url: "../WebService/WebService.asmx/VoteByMid",
+                type: "post",
+                data: { mid: mid },
+                success: function (r) {
+                    console.log(r);
+                    $(r).each(function (k, e) {
+                        $bg_div = $("<div>").addClass("bg_div1");
+                        $id = $("<div>").addClass("id").attr({ "id": this.vid });
+                        $logimg = $("<div>").addClass("logimg");
+                        $test = $("<div>").addClass("test");
+                        $datatiem = $("<div>").addClass("datatiem");
+                        $test.html("<p>" + (k + 1) + "." + this.vtopic + "<p/>");
+                        $datatiem.html(this.vdatetime);
+                        $bg_div.append($id);
+                        $bg_div.append($logimg);
+                        $bg_div.append($test);
+                        $bg_div.append($datatiem);
+                        $(".include").append($bg_div);
+                        $bg_div.click(function () {
+                            window.location = "VotePage.html?vid=" + e.vid + "&mid=" + 1;
+                        });
+                    });
+                    layer.closeAll('loading');
+
+                },
+                error: function (r) {
+                    console.log(r.responseText);
+                }
+            });
+        }
+    </script>
+    <style type="text/css">
+        * {
+            font-family: 微软雅黑;
+        }
+
+         body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        img {
+            height: auto;
+            width: 100%;
+        }
+
+        .include {
+            margin: 0 auto;
+            width: 100vw;
+            height: 100vh;
+            border: 1px solid rgb(244,246,127);
+            max-width: 640px;
+        }
+
+        .bg_div1 {
+            width: 95%;
+            margin: 0px auto;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            border: 1px solid #0065b5;
+            background-color: #f2f2f2;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .test {
+            width: 95%;
+            margin: 18px;
+            color: #0075bc;
+        }
+
+        .datatiem {
+            font-size: 12px;
+            color: #666666;
+            position: absolute;
+            right: 15px;
+            bottom: 0px;
+        }
+
+        .id {
+            visibility: hidden;
+            width: 0px;
+            height: 0px;
+        }
+
+        .min_bg_title {
+            width: 100%;
+            height: 44px;
+            background: rgb(1, 102, 207);
+            color: #FFF;
+            font-size: 18px;
+            line-height: 44px;
+            text-align: center;
+            position: fixed;
+            top: 0px;
+            z-index: 3;
+        }
+
+            .min_bg_title a {
+                position: absolute;
+                left: 5px;
+                top: 8px;
+            }
+    </style>
+</head>
+<body>
+    <div class="include">
+        <div class="top" style="position:relative;">
+            <img />
+            <a style="position:absolute;top:20px;right:20px;background:url('Images/zy.png') no-repeat;width:30px;height:30px;background-size:contain;" href="MeetInteract.html"></a>
+        </div>
+    </div>
+</body>
+</html>

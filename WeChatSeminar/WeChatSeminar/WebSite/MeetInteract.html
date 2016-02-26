@@ -9,7 +9,7 @@
     <script src="../Scripts/public.js"></script>
     <script type="text/javascript">
         var mid;
-        //加载标题图片
+        //加载标题img
         $(function () {
             layer.load(2);
             Login();
@@ -32,14 +32,13 @@
             });
         });
 
-        //点击投票
+        //点击投票按钮
         function tp_click() {
             window.location = "VoteListPage.html?mid=" + mid;
         }
 
-        //点击调研
+        //点击调研按钮---> //判断是有有调研
         function dy_click() {
-            //判断是有有调研
             $.ajax({
                 url: "../WebService/WebService.asmx/SurveyByMid",
                 type: "post",
@@ -59,9 +58,9 @@
 
         }
 
-        //点击现场回答
+        //点击现场回答按钮
         function xzhd_click() {
-            //layer.msg('正在开发中...', { icon: 4, time: 1000 });
+            //layer.msg('正在开发中...', { icon: 4, time: 2000 });
             window.location = "Answering.html?mid=" + mid;
         }
     </script>

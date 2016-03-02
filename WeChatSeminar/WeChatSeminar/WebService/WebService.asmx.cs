@@ -16,6 +16,8 @@ namespace WeChatSeminar.WebService
         MeetService ms = new MeetService();
         MinAdminService mas = new MinAdminService();
         JavaScriptSerializer jss = new JavaScriptSerializer();
+
+        #region 前台
         [WebMethod(Description = "登陆", EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void Login(string UserName, string Password)
@@ -121,7 +123,6 @@ namespace WeChatSeminar.WebService
                 Tools.Catch(res, ex);
             }
         }
-
         [WebMethod(Description = "按会议编号查询调研", EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void SurveyByMid(int mid)
@@ -170,9 +171,9 @@ namespace WeChatSeminar.WebService
                 Tools.Catch(res, ex);
             }
         }
+        #endregion
 
-
-
+        #region 后台
         [WebMethod(Description = "统计投票结果1", EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void VoteResultCount(int vid, string vresult)
@@ -235,6 +236,7 @@ namespace WeChatSeminar.WebService
                 Tools.Catch(res, ex);
             }
         }
+        #endregion
 
     }
 }

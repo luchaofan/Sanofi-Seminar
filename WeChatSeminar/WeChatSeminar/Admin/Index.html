@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Seminar后台管理系统</title>
+    <link href="Styles/Index.css" rel="stylesheet" />
+    <link href="UI/themes/default/easyui.css" rel="stylesheet" />
+    <script src="UI/jquery.min.js"></script>
+    <script src="UI/jquery.easyui.min.js"></script>
+    <script src="UI/easyui-lang-zh_CN.js"></script>
+    <script>
+        $.ajaxSetup({ async: false });
+        $(document).ready(function () {
+            PageLoad();
+            $(".ItemList_div li[item=i1]").click(function () {
+                ItemSelected(this, 1);
+                $(".MainForm iframe").attr("src", "ConferenceManagement/ConferenceManagement.html");
+            });
+
+            $(".ItemList_div li[item=i3]").click(function () {
+                ItemSelected(this, 3);
+                $(".MainForm iframe").attr("src", "UserManagement/RegisteredManagement.html");
+            });
+
+            $(".ItemList_div li[item=i4]").click(function () {
+                ItemSelected(this, 4);
+                var tt = $(".ItemList_div li[item=i4] span").html();
+                $(".MainForm iframe").attr("src", "UserManagement/UnregisteredManagement.html?t=" + tt);
+            });
+            $(".ItemList_div li[item=i5]").click(function () {
+                ItemSelected(this, 5);
+                $(".MainForm iframe").attr("src", "UserData/UserDataProducts.html");
+            });
+            $(".ItemList_div li[item=i7]").click(function () {
+                ItemSelected(this, 7);
+                $(".MainForm iframe").attr("src", "SendMessage/CustomizeMessage.html");
+            });
+            $(".ItemList_div li[item=i8]").click(function () {
+                ItemSelected(this, 8);
+                $(".MainForm iframe").attr("src", "SendMessage/SurveyMessage.html");
+            });
+            $(".ItemList_div li[item=i9]").click(function () {
+                ItemSelected(this, 9);
+                $(".MainForm iframe").attr("src", "ReportForm/Index.html");
+            });
+            $(".ItemList_div li[item=i10]").click(function () {
+                ItemSelected(this, 10);
+                $(".MainForm iframe").attr("src", "UserManagement/InternalManagement.html");
+            });
+        });
+
+        function PageLoad() {
+            $(".MainForm iframe").attr("src", "ConferenceManagement/ConferenceManagement.html");
+            $.ajax({
+                url: "MeetingService.asmx/IsExistSession",
+                data: {},
+                async: false,
+                type: "post",
+                success: function (msg) {
+                    console.log(msg);
+                    if (msg != null) {
+                        $(".tr2 td span").html(msg.OpenID);
+                    }
+                    else {
+                        alert("请重新登陆");
+                        location.href = "Login/Login.html";
+                    }
+                },
+                error: function (r) {
+                    console.log(r);
+                }
+            });
+        }
+        function ItemSelected(label, index) {
+            for (var i = 0; i <= 10; i++) {
+                if (i != index) {
+                    $(".ItemList_div li[item=i" + i + "]").removeClass("Selected");
+                }
+                else {
+                    $(".ItemList_div li[item=i" + i + "]").addClass("Selected");
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="WallPaper1">
+        <div class="WallPaper1_1">
+            <table>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr class="tr">
+                    <td>Seminar后台管理系统</td>
+                </tr>
+                <tr class="tr2">
+                    <td>当前用户:<span></span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="WallPaper1_2">
+            <div class="ItemList">
+                <ul class="ItemList_div">
+                    <li item="i0"></li>
+                    <li item="i1"><a>会议管理</a></li>
+                    <!--<li item="i2">用户管理</li>
+                    <li item="i3" align="righ"><a>已注册用户(<span></span>)</a></li>
+                    <li item="i4" align="righ"><a>未注册用户(<span></span>)</a></li>
+                    <li item="i5"><a>用户数据</a></li>
+                    <li item="i6">推送消息</li>
+                    <li item="i7" align="righ"><a>自定义消息</a></li>
+                    <li item="i8" align="righ"><a>会后调研</a></li>
+                    <li item="i9"><a>会议报表</a></li>
+                    <li item="i10"><a>内部用户管理</a></li>-->
+                </ul>
+            </div>
+            <div class="MainForm">
+                <iframe style="width:100%;height:99%"></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

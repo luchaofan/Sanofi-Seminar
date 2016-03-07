@@ -1,0 +1,119 @@
+﻿
+* {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+html, body, .WallPaper1 {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    min-width: 800px;
+}
+
+a {
+    cursor: pointer;
+}
+
+.WallPaper1_1 {
+    width: 100%;
+    height: 15%;
+    background: url('../Images/Login_Top_Bg.jpg') repeat-x;
+    background-size: contain;
+}
+
+.WallPaper1_2 {
+    width: 100%;
+    height: 85%;
+}
+
+.WallPaper1_1 table {
+    width: 90%;
+    height: 100%;
+    margin: 0px auto;
+}
+
+    .WallPaper1_1 table tr {
+        width: 100%;
+        height: 30%;
+    }
+
+.WallPaper1_1 .tr {
+    width: 100%;
+    height: 40%;
+    font-size: 18px;
+    font-family: "微软雅黑";
+    color: #0065b5;
+    font-weight: bolder;
+    /*background: url('../Images/Login_Top_Bg2.png') no-repeat right;*/
+    /*background-size:contain;*/
+}
+
+.WallPaper2_1 {
+    width: 100%;
+    height: 20%;
+}
+
+.WallPaper2_2 {
+    width: 100%;
+    height: 50%;
+}
+
+.WallPaper2_2_1 {
+    width: 20%;
+    height: 100%;
+    margin: 0px auto;
+    background: url('../Images/Login_Main_Bg.png') no-repeat center;
+    background-size: cover;
+}
+
+    .WallPaper2_2_1 table {
+        height: 100%;
+        width: 80%;
+        margin: 0px auto;
+    }
+
+.WallPaper2_2 .tr1 {
+    width: 100%;
+    height: 10%;
+}
+
+.WallPaper2_2 .tr2 {
+    width: 100%;
+    height: 14%;
+}
+
+    .WallPaper2_2 .tr2 input[type=text] {
+        width: 100%;
+        height: 90%;
+        background: url('../Images/Login_Main_Bg2.png') no-repeat right;
+        background-size: cover;
+    }
+
+    .WallPaper2_2 .tr2 input[type=password] {
+        width: 100%;
+        height: 90%;
+        background: url('../Images/Login_Main_Bg3.png') no-repeat right;
+        background-size: cover;
+    }
+
+    .WallPaper2_2 .tr2 input[type=button] {
+        width: 40%;
+        height: 100%;
+        background: url('../Images/Login_Main_Bg4.png') no-repeat center;
+        background-size: 100%;
+        float: right;
+    }
+
+    .WallPaper2_2 .tr2 span[texttype=reset] {
+        font-family: "微软雅黑";
+        font-size: 14px;
+        color: #0066cc;
+    }
+
+    .WallPaper2_2 .tr2 span[texttype=login] {
+        font-family: "微软雅黑";
+        font-size: 12px;
+        color: #ffffff;
+    }

@@ -10,5 +10,6 @@ namespace WeChatSeminar.WebService.Model
         public int ID { get; set; }
         public string OpenID { get; set; }
         public string CreateTime { get; set; }
+
     }
 }

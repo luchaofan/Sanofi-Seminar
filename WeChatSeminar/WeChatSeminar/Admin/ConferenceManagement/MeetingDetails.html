@@ -1,0 +1,152 @@
+﻿ <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../UI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="MeetingDetails.css" rel="stylesheet" />
+    <script src="../UI/jquery.min.js"></script>
+    <script src="../UI/jquery.easyui.min.js"></script>
+    <script src="../UI/easyui-lang-zh_CN.js"></script>
+    <script src="MeetingDetails.js"></script>
+</head>
+<body>
+    <div class="_WallPaper1">
+        <div class="_div1">
+            <table>
+                <tr class="tr2">
+                    <td type="title">会议详情
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="_div2">
+            <table>
+                <tr>
+                    <td style="text-align: center; color: #ffffff; font-size: 18px;">
+                        <span id="title"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="_div3">
+            <div class="LoadInfo">
+                <div class="beginTime">
+                </div>
+                <div class="endTime">
+                </div>
+                <div class="city">
+                </div>
+            </div>
+            <div class="Buttons">
+                <button type="button" id="button1">
+                    <img src="../Images/Meet_Detail_Info1.png" /></button>
+                <button type="button" id="button2">
+                    <img src="../Images/Meet_Detail_Invite1.png" /></button>
+                <button type="button" id="button3">
+                    <img src="../Images/Meet_Detail_Position1.png" /></button>
+                <button type="button" id="button4">
+                    <img src="../Images/Meet_Detail_HYRC1.png" /></button>
+                <button type="button" id="button5">
+                    <img src="../Images/Meet_Detail_Banner1.png" /></button>
+                <button type="button" id="button6">
+                    <img src="../Images/Meet_Detail_Data1.png" /></button>
+                <!-- <button type="button" id="button7">
+                    <img src="../Images/Meet_Detail_Interact1.png" /></button>-->
+                <button type="button" id="button8">
+                    <img src="../Images/Meet_Detail_ErCode1.png" /></button>
+                <!-- <button type="button" id="button9">
+                    <img src="../Images/Meet_Detail_Open.png" /></button>
+                <button type="button" id="button10">
+                    <img src="../Images/Meet_Detail_Close.png" /></button>-->
+            </div>
+            <div class="Content">
+            </div>
+        </div>
+        <div class="_div4">
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DCe6d51b46bd9a2754a925a492a0d726"></script>
+<script type="text/javascript">
+    //创建和初始化地图函数：
+    function initMap() {
+        createMap(); //创建地图
+        setMapEvent(); //设置地图事件
+        addMapControl(); //向地图添加控件
+        //addMapOverlay(); //向地图添加覆盖物
+    }
+    function createMap() {
+        map = new BMap.Map("map");
+        map.centerAndZoom(new BMap.Point(longitude, latitude), 15);
+        function showInfo(e) {
+            document.getElementById("longitude").value = e.point.lng;
+            document.getElementById("latitude").value = e.point.lat;
+        }
+        map.addEventListener("click", showInfo);
+    }
+    function setMapEvent() {
+        map.enableScrollWheelZoom();
+        map.enableKeyboard();
+        map.enableDragging();
+        map.enableDoubleClickZoom()
+    }
+    function addClickHandler(target, window) {
+        target.addEventListener("click", function () {
+            target.openInfoWindow(window);
+        });
+    }
+    function addMapOverlay(lat, lng) {
+        var markers = [
+        { content: "会议地址", title: "", imageOffset: { width: -46, height: -21 }, position: { lat: lat, lng: lng } }
+        ];
+        for (var index = 0; index < markers.length; index++) {
+            var point = new BMap.Point(markers[index].position.lng, markers[index].position.lat);
+            var marker = new BMap.Marker(point, {
+                icon: new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap/images/icon.png", new BMap.Size(20, 25), {
+                    imageOffset: new BMap.Size(markers[index].imageOffset.width, markers[index].imageOffset.height)
+                })
+            });
+            var label = new BMap.Label(markers[index].title, { offset: new BMap.Size(25, 5) });
+            var opts = {
+                width: 200,
+                title: markers[index].title,
+                enableMessage: false
+            };
+            label.setStyle({
+                opacity: "0.1",
+                border: "none",
+                color: "#000",
+                fontSize: "12px",
+                height: "0px",
+                lineHeight: "20px",
+                fontFamily: "微软雅黑"
+            });
+            var infoWindow = new BMap.InfoWindow(markers[index].content, opts);
+            marker.setLabel(label);
+            //marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+            marker.enableDragging();
+            addClickHandler(marker, infoWindow);
+            map.addOverlay(marker);
+        };
+    }
+    //向地图添加控件
+    function addMapControl() {
+        var scaleControl = new BMap.ScaleControl({ anchor: BMAP_ANCHOR_BOTTOM_LEFT });
+        scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
+        map.addControl(scaleControl);
+        var navControl = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE });
+        map.addControl(navControl);
+    }
+    function theLocation() {
+        if (document.getElementById("longitude").value != "" && document.getElementById("latitude").value != "") {
+            map.clearOverlays();
+            var new_point = new BMap.Point(document.getElementById("longitude").value, document.getElementById("latitude").value);
+            map.panTo(new_point);
+            addMapOverlay(document.getElementById("latitude").value, document.getElementById("longitude").value);
+        }
+    }
+    var map;
+    initMap();
+</script>

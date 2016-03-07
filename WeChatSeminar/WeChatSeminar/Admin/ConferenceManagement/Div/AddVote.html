@@ -1,0 +1,22 @@
+﻿<div id="Topics" style='width: 99%; height: 98%; overflow-y: auto; overflow-x: hidden;'>
+    <div name="item" style="min-height: 100px; width: 95%; margin-top: 10px; margin-left: auto; margin-right: auto;">
+        <div name="left" style="width: 15%; height: 90px; text-align: center; float: left;">
+            投票内容
+            <br />
+            单选<input  type="radio" name="type" checked="checked" value="0" /><br />
+            多选<input  type="radio" name="type" value="1"/>
+        </div>
+        <div name="center" style="width: 69%; height: auto; float: left;">
+            <div style="width: 99%; height: 60px; border: 1px solid silver;">
+                <textarea name="topic" style="width: 100%; height: 100%"></textarea>
+            </div>
+            <div style="width: 99%; height  : 25px; border: 1px solid silver; margin-top: 10px;">
+                <input name="item" type="text" style="width: 90%; height: 100%;" />
+                <input type="image" name="delete" src="../Images/Con_Interact_Del.png" style="float: right;" onclick="DeleteItem(this)" />
+            </div>
+        </div>
+        <div name="right" style="width: 15%; height: auto; float: left;">
+            <input type="image" name="addItem" src="../Images/Con_Interact_AddItems.png" style="margin-top: 73px;" onclick="AddItem(this)" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿
+<form id="forms" method="post" style="width: 100%; height: 100%;">
+    <table style="height: 93%; width: 100%; border: solid 1px silver;">
+        <tr>
+            <td style="width: 100%; height: 10%; border-bottom: solid 1px silver; background-color: silver;">会议基本信息</td>
+        </tr>
+        <tr>
+            <td style="width: 100%; height: 90%;">
+                <table style=" width: 99%; height: 100%; float: right;">
+                    <tr>
+                        <td style="width: 10%; height: 10%;">
+                            <label for="titles">会议名称</label>
+                        </td>
+                        <td style="width: 90%; height: 10%;">
+                            <input type="text" id="titles" name="Title" style="width: 80%;border:1px solid silver;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%; height: 10%;">
+                            <label for="bgTime">开始时间</label>
+                        </td>
+                        <td>
+                            <input type="text" id="bgTime" class="easyui-datetimebox" name="BgTime" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%; height: 10%;">
+                            <label for="edTime">结束时间</label>
+                        </td>
+                        <td>
+                            <input type="text" id="edTime" class="easyui-datetimebox" name="EdTime" />
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                         <td style="width: 10%; height: 10%;">
+                             <label for="products">产 品 组</label></td>
+                         <td>
+                             <select id="products" name="Products" /></td>
+                     </tr>-->
+                    <tr>
+                        <td style="width: 10%; height: 10%;">
+                            <label for="grade">会议等级</label>
+                        </td>
+                        <td>
+                            <select id="grade" name="Grade" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%; height: 10%;">
+                            <label for="province">省&nbsp;&nbsp;&nbsp;&nbsp; 份</label>
+                        </td>
+                        <td>
+                            <select id="province" name="Province"></select>
+                            <label for="city">城市</label>
+                            <select id="city" name="City" size="1" style="width: 10%; font-family: '微软雅黑'; font-size: 14px;border:1px solid silver;"></select><label for="address">
+                                地址
+                            </label><input type="text" id="address" name="Address" style="width: 53%;border:1px solid silver;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%; height: 10%;">
+                            <label for="introduction">会议简介</label>
+                        </td>
+                        <td>
+                            <textarea id="introduction" rows="4" maxlength="500" name="Introduction" style="width: 80%;border:1px solid silver;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <a onclick="javascript:submints(1)">
+                                <img src="../Images/Meet_DetailSave.png" style="float: right; margin-right: 20px;" />
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</form>
+

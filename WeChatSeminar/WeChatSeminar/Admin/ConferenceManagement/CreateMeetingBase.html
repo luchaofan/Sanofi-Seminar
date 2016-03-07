@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../UI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="CreateMeetingBase.css" rel="stylesheet" />
+    <script src="../UI/jquery.min.js"></script>
+    <script src="../UI/jquery.easyui.min.js"></script>
+    <script src="../UI/easyui-lang-zh_CN.js"></script>
+    <script src="CreateMeetingBase.js"></script>
+</head>
+<body>
+    <div class="_WallPaper1">
+        <div class="_div1">
+            <table>
+                <tr class="tr2">
+                    <td type="title">会议管理</td>
+                </tr>
+            </table>
+        </div>
+        <div class="_div2">
+        </div>
+        <div class="_div3">
+            <div class="_div3_1"></div>
+            <form id="forms" method="post" style="width: 100%; height: 100%;">
+                <table class="gride">
+                    <tr>
+                        <td class="tr1" style="border-bottom: solid 1px silver; background-color: silver;">会议基本信息</td>
+                    </tr>
+                    <tr>
+                        <td class="tr2">
+                            <table class="table">
+                                <tr>
+                                    <td class="td1">
+                                        <label for="title">会议名称</label></td>
+                                    <td class="td2">
+                                        <input type="text" id="title" name="Title" style="width: 80%;border:1px solid silver;height:25px;" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="td1">
+                                        <label for="bgTime">开始时间</label></td>
+                                    <td>
+                                        <input type="text" id="bgTime" class="easyui-datetimebox" name="BgTime" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="td1">
+                                        <label for="edTime">结束时间</label></td>
+                                    <td>
+                                        <input type="text" id="edTime" class="easyui-datetimebox" name="EdTime" /></td>
+                                </tr>
+                                <!--<tr>
+                                    <td class="td1">
+                                        <label for="products">产 品 组</label></td>
+                                    <td>
+                                        <select id="products" name="Products" /></td>
+                                </tr>-->
+                                <tr>
+                                    <td class="td1">
+                                        <label for="grade">会议等级</label></td>
+                                    <td>
+                                        <select id="grade" name="Grade" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="td1">
+                                        <label for="province">省&nbsp;&nbsp;&nbsp;&nbsp; 份</label></td>
+                                    <td>
+                                        <select id="province" name="Province"></select>
+                                        <label for="city">城市:</label>
+                                        <select id="city" name="City" size="1" style="width: 120px; font-family: '微软雅黑'; font-size: 14px;border:1px solid silver;"></select><label for="address">
+                                            地址:</label><input type="text" id="address" name="Address" style="width: 53%; border:1px solid silver;height:23px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td1">
+                                        <label for="introduction">会议简介</label></td>
+                                    <td>
+                                        <textarea id="introduction" rows="4" maxlength="500" name="Introduction" style="width: 80%;border:1px solid silver;"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><a onclick="javascript:submints()">
+                                        <img src="../Images/Con_Next.png" style="float: right; margin-right: 20px;" /></a></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="_div4"></div>
+    </div>
+</body>
+</html>

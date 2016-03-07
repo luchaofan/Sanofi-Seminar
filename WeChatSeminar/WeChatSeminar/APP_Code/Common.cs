@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -139,5 +140,30 @@ namespace WeChatSeminar.APP_Code
             }
 
         }
+
+        public static void WriteLog(string Log, string MethodName)
+        {
+            string path = HttpContext.Current.Server.MapPath("~/Log");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            string path2 = HttpContext.Current.Server.MapPath("~/Log/" + DateTime.Now.ToString("yyyyMMdd") + ".log");
+            StreamWriter streamWriter;
+            if (File.Exists(path2))
+            {
+                streamWriter = File.AppendText(path2);
+            }
+            else
+            {
+                streamWriter = new StreamWriter(path2);
+            }
+            streamWriter.WriteLine("-----" + DateTime.Now.ToString("yyyyMMdd HH:mm:ss") + "------");
+            streamWriter.WriteLine("-----方法名称" + MethodName + "-----");
+            streamWriter.WriteLine(Log);
+            streamWriter.Flush();
+            streamWriter.Close();
+        }
+
     }
 }

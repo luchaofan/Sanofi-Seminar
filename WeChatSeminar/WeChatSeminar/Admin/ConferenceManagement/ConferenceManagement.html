@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../UI/themes/default/easyui.css" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-family: "微软雅黑";
+            border: 0px;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        ._WallPaper1 {
+            height: 100%;
+            width: 98%;
+            margin: 0px auto;
+            color: #000000;
+            font-family: "微软雅黑";
+        }
+
+        ._div1 {
+            width: 100%;
+            height: 10%;
+        }
+
+            ._div1 table {
+                width: 100%;
+                height: 100%;
+            }
+
+            ._div1 .tr2 {
+                width: 100%;
+                height: 80%;
+            }
+
+                ._div1 .tr2 td[type=title] {
+                    width: 50%;
+                    text-align: left;
+                    font-size: 18px;
+                    font-weight: 500;
+                }
+
+                ._div1 .tr2 td[type=button] {
+                    text-align: right;
+                    width: 50%;
+                }
+
+            ._div1 input {
+                background: url("../Images/Con_CreateMeeting.png")no-repeat center;
+                background-size: cover;
+                height: 70%;
+                width: 80px;
+            }
+
+        ._div2 {
+            width: 100%;
+            height: 6%;
+            background-color: #69b3ee;
+        }
+
+            ._div2 table {
+                width: 100%;
+                height: 100%;
+            }
+
+        ._div3 {
+            height: 78%;
+            width: 100%;
+        }
+
+            ._div3 .gride {
+                height: 100%;
+                width: 100%;
+                /*background: blue;*/
+            }
+
+        /*._div4 {
+            width: 100%;
+            height: 6%;
+            background: #0065b5;
+        }*/
+
+        #Products, #City, #Grade, #Search {
+            height: 100%;
+            width: 10%;
+        }
+
+        span[type=right] {
+            float: right;
+            margin-right: 10px;
+        }
+    </style>
+    <script src="../UI/jquery.min.js"></script>
+    <script src="../UI/jquery.easyui.min.js"></script>
+    <script src="../UI/easyui-lang-zh_CN.js"></script>
+    <script>
+        $(document).ready(function () {
+            //LoadProducts();
+            //LoadGrade();
+            //LoadCity();
+            LoadGraidTable();
+
+            $("#Search").searchbox({
+                searcher: function (value, name) {
+                    $("#Products").combobox("setValue", 100);
+                    $("#Grade").combobox("setValue", 0);
+                    LoadCity();
+                    $("#Date").datebox("setValue", "");
+                    LoadGraidTable()
+                }
+            });
+            $("#Date").datebox({
+                onSelect: function (date) {
+                    $("#Products").combobox("setValue", 100);
+                    $("#Grade").combobox("setValue", 0);
+                    LoadCity();
+                    $("#Search").searchbox("clear");
+                    LoadGraidTable()
+                }
+            });
+            $(".tr2 td[type=button] a").click(function () {
+                location.href = "CreateMeetingBase.html";
+            });
+        });
+        function LoadProducts() {
+            $.ajax({
+                async: false,
+                url: "../MeetingService.asmx/LoadProducts",
+                data: { type: "meet" },
+                type: "post",
+                success: function (msg) {
+                    if (msg.Result == "true") {
+                        $("#Products").combobox({
+                            data: msg.Message,
+                            textField: "PName",
+                            valueField: "Pid",
+                            onSelect: function (rec) {
+                                LoadCity();
+                                LoadCity();
+                                $("#Grade").combobox("setValue", 0);
+                                $("#Search").searchbox("clear");
+                                $("#Date").datebox("setValue", "");
+                                LoadGraidTable();
+                            }
+                        });
+                    }
+                },
+                error: function (a, b, c) {
+                    console.log(b);
+                }
+            });
+        }
+
+        function LoadCity() {
+            var pid = $("#Products").combobox("getValue");
+            $.ajax({
+                async: false,
+                url: "../MeetingService.asmx/GetReport8_City",
+                data: { pid: pid },
+                type: "post",
+                success: function (msg) {
+                    if (msg.Result == true) {
+                        $("#City").combobox({
+                            data: msg.Message,
+                            textField: "CityName",
+                            valueField: "CityID",
+                            onSelect: function (rec) {
+                                LoadGraidTable()
+                            }
+                        });
+                    }
+                },
+                error: function (a, b, c) {
+                    console.log(c);
+                }
+            });
+        }
+
+        function LoadGrade() {
+            $("#Grade").combobox({
+                panelHeight: "50px",
+                data: [{ "ID": 0, "GradeName": "--无--", "selected": "true" },
+                        { "ID": 1, "GradeName": "全国" },
+                        { "ID": 2, "GradeName": "区域" },
+                        { "ID": 3, "GradeName": "城市" },
+                        { "ID": 4, "GradeName": "内部" }],
+                textField: "GradeName",
+                valueField: "ID",
+                onSelect: function (rec) {
+                    LoadGraidTable()
+                }
+            });
+        }
+        function LoadGraidTable() {
+            //var Products = $("#Products").combobox("getValue");
+            //var City = $("#City").combobox("getText");
+            //var Grade = $("#Grade").combobox("getText");
+            //var Date = $("#Date").datebox("getValue");
+            //var Search = $("#Search").searchbox("getValue");
+            $(".gride").datagrid({
+                url: "../MeetingService.asmx/GetMeetingList",
+                async: false,
+                rownumbers: true,
+                singleSelect: true,
+                method: "post",
+                pagination: true,
+                fitColumns: true,
+                pageNumber: 1,
+                pageSize: 15,
+                pageList: [5, 10, 15],
+                queryParams: {
+                    Products: "",
+                    City: "",
+                    Grade: "",
+                    Date: "",
+                    SearchText: ""
+                },
+                columns: [[
+                    {
+                        field: "MeetingID", title: "会议编号", hidden: true
+                    },
+                    {
+                        field: "mbegintime", title: "召开日期", width: $(this).width() * 0.1
+
+                    },
+                    //{
+                    //    field: "Product", title: "产品组", width: $(this).width() * 0.1
+                    //},
+                    {
+                        field: "mgrade", title: "会议等级", width: $(this).width() * 0.15,
+
+                    },
+                    {
+                        field: "mtitle", title: "会议主题", width: $(this).width() * 0.3,
+
+                    },
+                    {
+                        field: "mregion", title: "城市",
+                        width: $(this).width() * 0.1
+                    },
+                    {
+                        field: "aa", title: "互动题目",
+                        formatter: function (value, row, index) {
+                            var html = "<a onclick='Redirect(\"CreateMeetingInteract.html?mid=" + row.mid + "\")'><image src='../Images/Con_Interact.png' /></a>"
+                            return html;
+                        },
+                        width: $(this).width() * 0.1
+                    },
+                    {
+                        field: "bb", title: "会议详情",
+                        formatter: function (value, row, index) {
+                            var html = "<a href='javascript:Redirect(\"MeetingDetails.html?mid=" + row.mid + "\")'><image src='../Images/Con_MeetDetalis.png' /></a>"
+                            return html;
+                        },
+                        width: $(this).width() * 0.1
+                    },
+                    {
+                        field: "cc", title: "删除",
+                        formatter: function (value, row, index) {
+                            var html = "<a href='javascript:Delete(" + row.mid + ")'><image src='../Images/Con_MeetDelete.png' /></a>"
+                            return html;
+                        },
+                        width: $(this).width() * 0.1
+                    }
+                ]],
+                onLoadSuccess: function (data) {
+                    console.log(data);
+                    if (data.total == "0") {
+                        $.messager.alert("提示", "没有相关数据");
+                    }
+                },
+                onLoadError: function (msg, b, c) {
+                    console.log(b);
+                }
+            });
+
+        }
+
+        function Delete(MeetingID) {
+            $.messager.confirm("确认", "您确认要删除记录吗？", function (rec) {
+                if (rec) {
+                    $.ajax({
+                        url: "../MeetingService.asmx/DeleteMeeting",
+                        data: { MeetingID: MeetingID },
+                        type: "post",
+                        success: function (msg) {
+                            console.log(msg);
+                            $.messager.alert("提示", msg.Message);
+                            $(".gride").datagrid("reload");
+                        },
+                        error: function (a, b, c) { console.log(b); }
+                    });
+                }
+            });
+        }
+
+        function Redirect(url) {
+            //console.log(url);
+            location.href = url;
+        }
+
+    </script>
+</head>
+<body>
+    <div class="_WallPaper1">
+        <div class="_div1">
+            <table>
+                <tr class="tr2">
+                    <td type="title">
+                        会议管理
+                    </td>
+                    <td type="button">
+                        <a>
+                            <img src="../Images/Con_CreateMeeting.png" />
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="_div2">
+            <table>
+                <tr>
+                    <td>
+                        <!--<span>产品组：<select id="Products"></select></span> <span>城市：<select id="City"></select></span>
+                        <span>会议等级：<select id="Grade"></select></span> <span>会议日期：<input id="Date" type="text"
+                            class="easyui-datebox" /></span> <span type="right">
+                                <input id="Search" class="easyui-searchbox" /></span>-->
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="_div3">
+            <table class="gride"></table>
+        </div>
+        <div class="_div4">
+        </div>
+    </div>
+</body>
+</html>

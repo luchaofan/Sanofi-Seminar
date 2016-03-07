@@ -1,0 +1,111 @@
+﻿
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: "微软雅黑";
+    border: 0px;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+._WallPaper1 {
+    height: 100%;
+    width: 98%;
+    margin: 0px auto;
+    color: #000000;
+    font-family: "微软雅黑";
+}
+
+._div1 {
+    width: 100%;
+    height: 10%;
+}
+
+    ._div1 table {
+        width: 100%;
+        height: 100%;
+    }
+
+    ._div1 .tr2 {
+        width: 100%;
+        height: 80%;
+    }
+
+        ._div1 .tr2 td[type=title] {
+            width: 50%;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+._div2 {
+    width: 100%;
+    height: 6%;
+    background-color: #69b3ee;
+}
+
+
+._div3 {
+    height: 78%;
+    width: 100%;
+}
+
+._div3_1 {
+    height: 5%;
+}
+
+.gride {
+    height: 93%;
+    width: 100%;
+    border: solid 1px silver;
+}
+
+    .gride .tr1 {
+        width: 100%;
+        height: 10%;
+    }
+
+    .gride .tr2 {
+        width: 100%;
+        height: 90%;
+    }
+
+.table {
+    width: 99%;
+    height: 100%;
+    float: right;
+}
+
+    .table .td1 {
+        width: 10%;
+        height: 10%;
+    }
+
+    .table .td2 {
+        width: 90%;
+        height: 10%;
+    }
+
+a {
+    cursor: pointer;
+}
+
+#products, #grade {
+    height: 100%;
+    width: 10%;
+}
+
+#div_Fiel {
+    width: 96%;
+    height: 90%;
+    margin: 20px auto;
+    border: 1px solid silver;
+}
+
+    #div_Fiel span {
+        display: block;
+        float: left;
+    }

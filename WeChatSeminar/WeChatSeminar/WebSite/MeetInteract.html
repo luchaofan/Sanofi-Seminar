@@ -13,8 +13,10 @@
         $(function () {
             layer.load(2);
             Login();
-            //mid = GetQueryString("mid");
-            mid = 1;
+            mid = GetQueryString("mid");
+            if (mid == null || mid == "") {
+                mid = 1;
+            }
             $.ajax({
                 url: "../WebService/WebService.asmx/GetMeetingById",
                 type: "post",

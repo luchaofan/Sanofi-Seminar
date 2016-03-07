@@ -1,0 +1,107 @@
+﻿
+* {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+html, body, .WallPaper1 {
+    height: 100%;
+    width: 100%;
+    min-height: 600px;
+    min-width: 1300px;
+}
+
+.WallPaper1_1 {
+    width: 100%;
+    height: 15%;
+    background: url('../Images/Login_Top_Bg.jpg')repeat-x;
+    background-size: contain;
+}
+
+.WallPaper1_2 {
+    height: 85%;
+    width: 100%;
+}
+
+.WallPaper1_1 table {
+    width: 90%;
+    height: 100%;
+    margin: 0px auto;
+}
+
+    .WallPaper1_1 table tr {
+        width: 100%;
+        height: 30%;
+    }
+
+.WallPaper1_1 .tr {
+    width: 100%;
+    height: 40%;
+    font-size: 18px;
+    font-family: "微软雅黑";
+    color: #0065b5;
+    font-weight: bolder;
+    /*background: url('../Images/Login_Top_Bg2.png') no-repeat right;*/
+}
+
+.WallPaper1_1 .tr2 {
+    font-size: 14px;
+    font-family: "微软雅黑";
+    color: #0065b5;
+    text-align: right;
+}
+
+.ItemList {
+    width: 13%;
+    height: 100%;
+    background-color: #0065b5;
+    float: left;
+}
+
+.MainForm {
+    width: 87%;
+    height: 100%;
+    float: left;
+    /*background-color: yellow;*/
+}
+
+
+.ItemList_div {
+    width: 100%;
+    height: 100%;
+    margin: 0px auto;
+    font-size: 12px;
+    font-family: "微软雅黑";
+    color: #ffffff;
+}
+
+.Selected {
+    color: #000000;
+    background-color: #69b3ee;
+}
+
+.ItemList_div {
+    list-style: none;
+}
+
+    .ItemList_div li {
+        height: 30px;
+        line-height: 30px;
+        width: 89%;
+        padding-left: 20px;
+    }
+
+        .ItemList_div li[align=righ] a {
+            margin-left: 20px;
+        }
+
+        .ItemList_div li[item=i0] {
+            height: 10px;
+            line-height: 10px;
+            width: 100%;
+        }
+
+a {
+    cursor: pointer;
+}

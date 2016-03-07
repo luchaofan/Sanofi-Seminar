@@ -1,0 +1,748 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../UI/themes/default/easyui.css" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-family: "微软雅黑";
+            border: 0px;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        ._WallPaper1 {
+            height: 100%;
+            width: 98%;
+            margin: 0px auto;
+            color: #000000;
+            font-family: "微软雅黑";
+        }
+
+        ._div1 {
+            width: 100%;
+            height: 10%;
+        }
+
+            ._div1 table {
+                width: 100%;
+                height: 100%;
+            }
+
+            ._div1 .tr2 {
+                width: 100%;
+                height: 80%;
+            }
+
+                ._div1 .tr2 td[type=title] {
+                    width: 50%;
+                    text-align: left;
+                    font-size: 18px;
+                    font-weight: 500;
+                }
+
+        ._div2 {
+            width: 100%;
+            height: 6%;
+            background-color: #69b3ee;
+        }
+
+            ._div2 table {
+                width: 100%;
+                height: 100%;
+            }
+
+
+        ._div3 {
+            height: 78%;
+            width: 100%;
+        }
+
+        ._div3_1 {
+            width: 100%;
+            height: 8%;
+        }
+
+        .beginTime {
+            width: 38%;
+            height: 100%;
+            float: left;
+        }
+
+        .endTime {
+            width: 30%;
+            height: 100%;
+            float: left;
+        }
+
+        .city {
+            width: 28%;
+            height: 100%;
+            display: table-cell;
+            vertical-align: middle;
+            float: right;
+            text-align: right;
+            margin-right: 20px;
+        }
+
+        .gride {
+            height: 90%;
+            width: 100%;
+            border: solid 1px silver;
+        }
+
+            .gride .tr1 {
+                width: 100%;
+                height: 10%;
+            }
+
+            .gride .tr2 {
+                width: 100%;
+                height: 90%;
+            }
+
+        .block {
+            display: block;
+        }
+
+        .none {
+            display: none;
+        }
+
+        a {
+            cursor: pointer;
+        }
+    </style>
+    <script src="../UI/jquery.min.js"></script>
+    <script src="../UI/jquery.easyui.min.js"></script>
+    <script src="../UI/easyui-lang-zh_CN.js"></script>
+    <script>
+        var mid = location.href.split('?')[1].split('=')[1];
+        var url1 = "../Images/Con_Vote1.png";
+        var url2 = "../Images/Con_Vote2.png";
+        var url3 = "../Images/Con_Survey1.png";
+        var url4 = "../Images/Con_Survey2.png";
+        //var url5 = "../Images/Con_Topic1.png";
+        //var url6 = "../Images/Con_Topic2.png";
+        $.ajaxSetup({ async: false });
+        $(document).ready(function () {
+            PageLoad();
+            $("input[type='image']:eq(0)").click(function () {
+                console.log($(this).attr("src"));
+                if ($(this).attr("src") == url1) {
+                    $(this).attr("src", url2);
+                    $("div[name='content']").removeClass("none");
+                    $("div[name='content']").addClass("block");
+                    $("input[type='image']:eq(1)").attr("src", url3);
+                    //$("input[type='image']:eq(2)").attr("src", url5);
+                    $("p").html("投票题");
+                    LoadVote();
+                }
+                else {
+                    $(this).attr("src", url1);
+                    $("div[name='content']").removeClass("block");
+                    $("div[name='content']").addClass("none");
+                }
+            });
+            $("input[type='image']:eq(1)").click(function () {
+                console.log($(this).attr("src"));
+                if ($(this).attr("src") == url3) {
+                    $(this).attr("src", url4);
+                    $("div[name='content']").removeClass("none");
+                    $("div[name='content']").addClass("block");
+                    $("input[type='image']:eq(0)").attr("src", url1);
+                    //$("input[type='image']:eq(2)").attr("src", url5);
+                    $("p").html("调研题");
+                    LoadSurvey();
+                }
+                else {
+                    $(this).attr("src", url3);
+                    $("div[name='content']").removeClass("block");
+                    $("div[name='content']").addClass("none");
+                }
+            });
+            //$("input[type='image']:eq(2)").click(function () {
+            //    console.log($(this).attr("src"));
+            //    if ($(this).attr("src") == url5) {
+            //        $(this).attr("src", url6);
+            //        $("div[name='content']").removeClass("none");
+            //        $("div[name='content']").addClass("block");
+            //        $("input[type='image']:eq(0)").attr("src", url1);
+            //        $("input[type='image']:eq(1)").attr("src", url3);
+            //        $("p").html("议题评分");
+            //        LoadTopic();
+            //    }
+            //    else {
+            //        $(this).attr("src", url5);
+            //        $("div[name='content']").removeClass("block");
+            //        $("div[name='content']").addClass("none");
+            //    }
+            //});
+            $("input[type='image']:eq(2)").click(function () {
+                Input4_Click();
+            });
+        });
+        function PageLoad() {
+            $.ajax({
+                url: "../MeetingService.asmx/GetMeetingBaseInfo_T",
+                data:
+                    {
+                        mid: mid
+                    },
+                type: "post",
+                success: function (data) {
+                    console.log(data);
+                    if (data.Result == "true") {
+                        $("#title").text(data.Message.Title);
+                        $(".beginTime").text("开始时间：" + data.Message.mbegintime);
+                        $(".endTime").text("结束时间：" + data.Message.mendtime);
+                        $(".city").text("城市：" + data.Message.mregion);
+                        $("._div4").css("display", "none");
+                        $("input[type='image']:eq(0)").attr("src", url2);
+                        $("div[name='content']").removeClass("none");
+                        $("div[name='content']").addClass("block");
+                        $("input[type='image']:eq(1)").attr("src", url3);
+                        //$("input[type='image']:eq(2)").attr("src", url5);
+                        $("p").html("投票题");
+                        LoadVote();
+                    }
+                },
+                error: function (a, b, c) {
+                    console.log(b);
+                }
+            });
+        }
+
+        function LoadVote() {
+            $(".view").empty();
+            $.ajax({
+                url: "../MeetingService.asmx/GetVote",
+                type: "post",
+                data: { mid: mid },
+                success: function (data) {
+                    console.log(data);
+                    if (data.Result == "true") {
+                        $(data.Message).each(function (i, e) {
+                            var title = e.vtopic;
+                            var vid = e.vid;
+                            var type = e.vtype;
+                            var items = e.vanswer.split('|');
+                            var vote = { vid: vid, title: title, items: items };
+                            var height = 125 + (items.length * 39);
+                            var html = "<div name='item' style='min-height:100px;width:95%; height:" + height + "px;margin-top:10px;margin-left:auto;margin-right:auto; display:block'>" +
+                                   "<div name='left' style='width: 15%; height: 100px; float: left; text-align:center;'>单选" +
+                                   "<input type='radio' name='type" + i + "' checked='checked' value='0' /><br />多选<input type='radio' name='type" + i + "' value='1'/></div>" +
+                                   "<div name='center' style='width: 84%; height: auto; float: left;border:1px solid silver;'>" +
+                                   "<div style='width: 99%; height: 60px;'> " + (i + 1) + "." + title + "</div>";
+                            $.each(items, function (j, k) {
+                                var l = "";
+                                switch (j) {
+                                    case 0:
+                                        l = "&nbsp;&nbsp;&nbsp;&nbsp;A.";
+                                        break;
+                                    case 1:
+                                        l = "&nbsp;&nbsp;&nbsp;&nbsp;B.";
+                                        break;
+                                    case 2:
+                                        l = "&nbsp;&nbsp;&nbsp;&nbsp;C.";
+                                        break;
+                                    case 3:
+                                        l = "&nbsp;&nbsp;&nbsp;&nbsp;D.";
+                                        break;
+                                    case 4:
+                                        l = "&nbsp;&nbsp;&nbsp;&nbsp;E.";
+                                        break;
+                                }
+                                html += "<div style='width:99%;height:25px;margin-top:10px;'>" + l + k + "</div>";
+                            });
+                            html += "<div style='width:99%;height:25px;'><div style='100px;height:25px;float:right;'>" +
+                                    "<input type='image' name='update" + i + "' src='../Images/Con_InteractUpdate.png'/>" +
+                                    "<input type='image' name='addItem' src='../Images/Con_InteractDelete.png' onclick='DeleteTopics(this,1," + vid + ")' />" +
+                                    "</div></div></div></div>";
+                            $(".view").append(html);
+                            $("input[name='type" + i + "'][value='" + type + "']").attr("checked", "checked");
+                            $("input[name='update" + i + "']").click(function () {
+                                UpdateTopics(this, 1, vote);
+                            });
+                        });
+                    }
+                    else {
+                        console.log(data.Message);
+                    }
+                },
+                error: function (a, b, c) {
+                    console.log(b);
+                }
+            });
+        }
+
+        function Input4_Click() {
+
+            if ($("input[type='image']:eq(0)").attr("src") == url2) {
+                $(".gride .tr2").empty();
+                var num = 1;
+                $("._div4").css("display", "block");
+                $("#title1").html("投票题<input type='image' name='AddTopic' src='../Images/Con_Add_Vote.png' style='float:right;margin-right:20px;'>");
+                $.get("Div/AddVote.html", function (data) {
+                    $(".gride .tr2").append(data);
+                    $.parser.parse($(".gride .tr2"));
+                    $("input[name='AddTopic']").click(function () {
+                        var html = "<div name='item' style='min-height:100px;width:95%;height: auto;margin-top:10px;margin-left:auto;margin-right:auto; display:block'>" +
+                                   "<div name='left' style='width: 15%; height: 100px; float: left; text-align:center;'>投票内容<br />单选" +
+                                   "<input id='Radio1' type='radio' name='type" + num + "' checked='checked' value='0' /><br />多选<input id='Radio2' type='radio' name='type" + num + "' value='1'/></div>" +
+                                   "<div name='center' style='width: 69%; height: auto; float: left;'>" +
+                                   "<div style='width: 99%; height: 60px; border: 1px solid silver;'> <textarea name='topic' style='width:100%;height:100%'></textarea></div>" +
+                                   "<div style='width:99%;height:25px;border:1px solid silver;margin-top:10px;'>" +
+                                   "<input name='item' type='text' style='width:90%;height:100%;' />" +
+                                   "<input type='image' name='delete' src='../Images/Con_Interact_Del.png' style='float:right;' onclick='DeleteItem(this)' />" +
+                                   "</div></div><div name='right' style='width: 15%; height: auto; float: left;'>" +
+                                   "<input type='image' name='addItem' src='../Images/Con_Interact_AddItems.png' style='margin-top:73px;' onclick='AddItem(this)' /></div></div>";
+                        $("#Topics").append(html);
+                        num++;
+                    });
+                    $("._div4 input").click(function () {
+                        Submit(1);
+                    });
+                });
+            }
+            if ($("input[type='image']:eq(1)").attr("src") == url4) {
+                $(".gride .tr2").empty();
+                var num = 1;
+                $("._div4").css("display", "block");
+                $("#title1").html("调研题<input type='image' name='AddTopic' src='../Images/Con_Add_Survey.png' style='float:right;margin-right:20px;'>");
+                $.get("Div/AddSuryvey.html", function (data) {
+                    $(".gride .tr2").append(data);
+                    // $.parser.parse($(".gride .tr2"));
+                    $("input[name='AddTopic']").click(function () {
+                        var html = "<div name='item' style='min-height:100px;width:95%;height: auto;margin-top:10px;margin-left:auto;margin-right:auto; display:block'>" +
+                                   "<div name='left' style='width: 15%; height: 100px; float: left; text-align:center;'>调研题内容<br />单选" +
+                                   "<input id='Radio1' type='radio' name='type" + num + "' checked='checked' value='0' /><br />多选<input id='Radio2' type='radio' name='type" + num + "' value='1'/></div>" +
+                                   "<div name='center' style='width: 69%; height: auto; float: left;'>" +
+                                   "<div style='width: 99%; height: 60px; border: 1px solid silver;'> <textarea name='topic' style='width:100%;height:100%'></textarea></div>" +
+                                   "<div style='width:99%;height:25px;border:1px solid silver;margin-top:10px;'>" +
+                                   "<input name='item' type='text' style='width:90%;height:100%;' />" +
+                                   "<input type='image' name='delete' src='../Images/Con_Interact_Del.png' style='float:right;' onclick='DeleteItem(this)' />" +
+                                   "</div></div><div name='right' style='width: 15%; height: auto; float: left;'>" +
+                                   "<input type='image' name='addItem' src='../Images/Con_Interact_AddItems.png' style='margin-top:73px;' onclick='AddItem(this)' /></div></div>";
+                        $("#Topics").append(html);
+                    });
+                    $("._div4 input").click(function () {
+                        Submit(2);
+                    });
+                });
+            }
+            //if ($("input[type='image']:eq(2)").attr("src") == url6) {
+            //    $(".gride .tr2").empty();
+            //    $("._div4").css("display", "block");
+            //    $("#title1").html("议题评分<input type='image' name='AddTopic' src='../Images/Con_Add_Tipopic.png' style='float:right;margin-right:20px;'>");
+            //    $.get("Div/AddTopic.html", function (data) {
+            //        $(".gride .tr2").append(data);
+            //        // $.parser.parse($(".gride .tr2"));
+            //        $("input[name='AddTopic']").click(function () {
+            //            var html = "<div name='item' style='min-height: 110px; width: 95%; margin-top: 10px; margin-left: auto; margin-right: auto;height:auto'>" +
+            //                      "<diiv name='left' style='width: 15%;float:left;'>" +
+            //                      "<div style='width:70%;height:25px;margin:0px auto;'>标&nbsp;&nbsp; 题</div>" +
+            //                      "<div style='width:70%;height:60px;margin:0px auto;margin-top:10px;'>议题内容</div> </diiv>" +
+            //                      "<div name='center' style='width: 84%;float:left;'>" +
+            //                      "<div style='width: 100%; height: 25px;border:1px solid silver;'>" +
+            //                      "<input name='item' type='text' style='width: 90%; height: 100%;' />" +
+            //                      "<input type='image' name='delete' src='../Images/Con_Interact_Del.png' style='float: right;' tp='3' onclick='DeleteItem(this)' /></div>" +
+            //                      "<div style='width: 100%; height: 60px; margin-top: 10px;border:1px solid silver;'>" +
+            //                      "<textarea name='topic' style='width: 100%; height: 100%'></textarea></div></div></div>";
+            //            $("#Topics").append(html);
+            //        });
+            //        $("._div4 input").click(function () {
+            //            Submit(3);
+            //        });
+            //    });
+            //}
+        }
+
+        function DeleteItem(e) {
+            if ($(e).attr("tp") == "3") {
+                $(e).parent().parent().parent().remove();
+            }
+            else {
+                var height = parseInt($(e).parent().parent().parent().css("height").split('p')[0]);
+                $(e).parent().parent().parent().css("height", (height - 27) + "px");
+                $(e).parent().remove();
+            }
+        }
+
+        function AddItem(e) {
+            var ss = $(e).parent().parent().find("input[name='delete']").length;
+            if (ss < 5) {
+                var htm = "<div style='width:99%;height:25px;border:1px solid silver;margin-top:10px;'>" +
+                        "<input name='item' type='text' style='width:90%;height:100%;' />" +
+                        "<input type='image' name='delete' src='../Images/Con_Interact_Del.png' style='float:right;' onclick='DeleteItem(this)' />" +
+                        "</div>"
+                $(e).parent().parent().find("div[name='center']").append(htm);
+                var height = parseInt($(e).parent().parent().css("height").split('p')[0]);
+                $(e).parent().parent().css("height", (height + 37) + "px");
+            }
+        }
+
+        //删除题目
+        function DeleteTopics(elem, type, id) {
+            $.messager.confirm("提示", "确认删除该题目吗？", function (r) {
+                if (r) {
+                    var urls = "";
+                    if (type == 1) {
+                        urls = "../MeetingService.asmx/DeleteVoteTopic";
+                    }
+                    if (type == 2) {
+                        urls = "../MeetingService.asmx/DeleteSurveyTopic";
+                    }
+                    //if (type == 3) {
+                    //    urls = "../MeetingService.asmx/DeleteTopicTopic";
+                    //}
+                    $.ajax({
+                        url: urls,
+                        type: "post",
+                        data: { id: id },
+                        success: function (msg) {
+                            if (msg.Result == "true") {
+                                $.messager.alert("提示", "删除成功");
+                                if (type == 3) {
+                                    $(elem).parent().parent().remove();
+                                }
+                                else {
+                                    $(elem).parent().parent().parent().parent().remove();
+                                }
+                                $("._div4").css("display", "none");
+                            }
+                            else {
+                                console.log(msg.Message);
+                                return;
+                            }
+                        },
+                        error: function (a, b, c) {
+                            console.log(b);
+                        }
+                    });
+                }
+            });
+        }
+        //修改题目
+        function UpdateTopics(elem, type, ob) {
+            //var ob = $(elem).parent().find("input[type='hidden']").val();
+            console.log(ob);
+            $.messager.confirm("提示", "确定要修改题目吗？", function (r) {
+                if (r) {
+                    $("._div4").css("display", "block");
+                    if (type == 1 || type == 2) {
+                        var html = "<div style='width: 99%; height: 60px; border: 1px solid silver;'> <textarea name='topic' style='width:100%;height:100%'>" + ob.title + "</textarea></div>";
+                        $.each(ob.items, function (j, k) {
+                            html += "<div style='width:99%;height:25px;border:1px solid silver;margin-top:10px;'>" +
+                                    "<input name='item' type='text' style='width:90%;height:100%;' value='" + k + "' />" +
+                                    "<input type='image' name='delete' src='../Images/Con_Interact_Del.png' style='float:right;' onclick='DeleteItem(this)' /></div>";
+                        });
+                        html += "<div style='width:99%;height:25px;'><div style='100px;height:25px;float:right;'>" +
+                                "<input type='hidden' value='" + ob.vid + "' />" +
+                                "<input type='image' name='addItem' src='../Images/Con_InteractDelete.png' onclick='DeleteTopics(this," + type + "," + ob.vid + ")' />" +
+                                "</div></div>";
+                        $(elem).parent().parent().parent().css("border", "0px");
+                        $(elem).parent().parent().parent().html(html);
+                        $("._div4 input").click(function () {
+                            Submit(type);
+                        });
+                    }
+                    else {
+                        var html = "<diiv name='left' style='width: 15%;float:left;'>" +
+                                 "<div style='width:70%;height:25px;margin:0px auto;'>标&nbsp;&nbsp; 题</div>" +
+                                 "<div style='width:70%;height:60px;margin:0px auto;margin-top:10px;'>议题内容</div> </diiv>" +
+                                 "<div name='center' style='width: 84%;float:left;'>" +
+                                 "<div style='width: 100%; height: 25px;border:1px solid silver;'>" +
+                                 "<input name='item' type='text' value='" + ob.title + "' style='width: 90%; height: 100%;' />" +
+                                 "<input type='hidden' value='" + ob.tid + "' />" +
+                                 "<input type='image' name='delete' src='../Images/Con_Interact_Del.png' style='float: right;' onclick='DeleteTopics(this,3," + ob.tid + ")' /></div>" +
+                                 "<div style='width: 100%; height: 60px; margin-top: 10px;border:1px solid silver;'>" +
+                                 "<textarea name='topic' style='width: 100%; height: 100%'>" + ob.items + "</textarea></div></div>";
+                        $(elem).parent().parent().html(html);
+                        $("._div4 input").click(function () {
+                            Submit(type);
+                        });
+                    }
+                }
+                else {
+                    return;
+                }
+            });
+        }
+
+        function Submit(type) {
+            var aurl, data;
+            if (type == 1) {
+                aurl = "../MeetingService.asmx/AddVoteTopic";
+                data = "<list>";
+                $("div[name='item']").each(function (index, item) {
+                    var it = "";
+                    var type = $(item).find("input[type='radio']:checked").val();
+                    $(item).find("input[name='item']").each(function (i, e) {
+                        if (i == 0) {
+                            it += $(e).val();
+                        }
+                        else {
+                            it += "|" + $(e).val();
+                        }
+                    });
+                    if ($(item).find("textarea[name='topic']").val() == undefined) {
+                        return;
+                    }
+                    else {
+                        if ($(item).find("input[type='hidden']").val() == undefined || $(item).find("input[type='hidden']").val() == null) {
+                            data += "<vote title='" + $(item).find("textarea[name='topic']").val() + "' items='" + it + "' type='" + type + "' ></vote>";
+                        }
+                        else {
+                            data += "<vote title='" + $(item).find("textarea[name='topic']").val() + "' items='" + it + "' type='" + type + "' vid='" + $(item).find("input[type='hidden']").val() + "' ></vote>";
+                        }
+                    }
+                });
+                data += "</list>";
+            }
+            if (type == 2) {
+                aurl = "../MeetingService.asmx/AddSurveyTopics";
+                data = "<list>";
+                $("div[name='item']").each(function (index, item) {
+                    var it = "";
+                    var type = $(item).find("input[type='radio']:checked").val();
+                    $(item).find("input[name='item']").each(function (i, e) {
+                        if (i == 0) {
+                            it += $(e).val();
+                        }
+                        else {
+                            it += "|" + $(e).val();
+                        }
+                    });
+                    if ($(item).find("textarea[name='topic']").val() == undefined) {
+                        return;
+                    }
+                    else {
+                        if ($(item).find("input[type='hidden']").val() == undefined || $(item).find("input[type='hidden']").val() == null) {
+                            data += "<survey title='" + $(item).find("textarea[name='topic']").val() + "' items='" + it + "'  type='" + type + "'  ></survey>";
+                        }
+                        else {
+                            data += "<survey title='" + $(item).find("textarea[name='topic']").val() + "' items='" + it + "'  type='" + type + "'  sid='" + $(item).find("input[type='hidden']").val() + "' ></survey>";
+                        }
+                    }
+                });
+                data += "</list>";
+            }
+            if (type == 3) {
+                aurl = "../MeetingService.asmx/AddTopicTopics";
+                data = "<list>";
+                console.log("gg" + $("div[name='item']").length);
+                $("div[name='item']").each(function (index, item) {
+                    if ($(item).find("textarea[name='topic']").val() == undefined) {
+                        return;
+                    }
+                    else {
+                        console.log($(item).find("textarea[name='topic']").val());
+                        if ($(item).find("input[type='hidden']").val() == undefined) {
+                            data += "<topic content='" + $(item).find("textarea[name='topic']").val() + "' title='" + $(item).find("input[type='text']").val() + "'  ></topic>";
+                        }
+                        else {
+                            data += "<topic content='" + $(item).find("textarea[name='topic']").val() + "' title='" + $(item).find("input[type='text']").val() + "'  tid='" + $(item).find("input[type='hidden']").val() + "' ></topic>";
+                        }
+                    }
+                });
+                data += "</list>";
+            }
+            $.ajax({
+                url: aurl,
+                type: "post",
+                data:
+                    {
+                        data: data,
+                        mid: mid
+                    },
+                success: function (msg) {
+                    if (msg.Result == "true") {
+                        //$.messager.alert("提示", msg.Message);
+                        location.href = location.href;
+                    }
+                    else {
+                        console.log(msg.Message);
+                        return;
+                    }
+                },
+                error: function (a, b, c) {
+                    console.log(b);
+                }
+            });
+        }
+
+        function LoadSurvey() {
+            $(".view").empty();
+            $.ajax({
+                url: "../MeetingService.asmx/GetSurvey",
+                type: "post",
+                data: { mid: mid },
+                success: function (data) {
+                    console.log(data);
+                    if (data.Result == "true") {
+                        $(data.Message).each(function (i, e) {
+                            var title = e.stitle;
+                            var sid = e.sid;
+                            var type = e.stype
+                            var items = e.sanswer.split('|');
+                            var surver = { vid: sid, title: title, items: items };
+                            var height = 125 + (items.length * 39);
+                            var html = "<div name='item' style='min-height:100px;width:95%; height:" + height + "px;margin-top:10px;margin-left:auto;margin-right:auto; display:block'>" +
+                                   "<div name='left' style='width: 15%; height: 100px; float: left; text-align:center;'>单选" +
+                                   "<input type='radio' name='type" + i + "' checked='checked' value='0' /><br />多选<input type='radio' name='type" + i + "' value='1'/></div>" +
+                                   "<div name='center' style='width:84%; height: auto; float: left;border:1px solid silver;'>" +
+                                   "<div style='width: 99%; height: 60px;'> " + (i + 1) + "." + title + "</div>";
+                            $.each(items, function (j, k) {
+                                var l = "";
+                                switch (j) {
+                                    case 0:
+                                        l = "&nbsp;&nbsp;&nbsp;&nbsp;A.";
+                                        break;
+                                    case 1:
+                                        l = "&nbsp;&nbsp;&nbsp;&nbsp;B.";
+                                        break;
+                                    case 2:
+                                        l = "&nbsp;&nbsp;&nbsp;&nbsp;C.";
+                                        break;
+                                    case 3:
+                                        l = "&nbsp;&nbsp;&nbsp;&nbsp;D.";
+                                        break;
+                                    case 4:
+                                        l = "&nbsp;&nbsp;&nbsp;&nbsp;E.";
+                                        break;
+                                }
+                                html += "<div style='width:99%;height:25px;margin-top:10px;'>" + l + k + "</div>";
+                            });
+                            html += "<div style='width:99%;height:25px;'><div style='100px;height:25px;float:right;'>" +
+                                    "<input type='image' name='update" + i + "' src='../Images/Con_InteractUpdate.png'/>" +
+                                    "<input type='image' name='addItem' src='../Images/Con_InteractDelete.png' onclick='DeleteTopics(this,2," + sid + ")' />" +
+                                    "</div></div></div></div>";
+                            $(".view").append(html);
+                            $("input[name='type" + i + "'][value='" + type + "']").attr("checked", "checked");
+                            $("input[name='update" + i + "']").click(function () {
+                                UpdateTopics(this, 2, surver);
+                            });
+                        });
+                    }
+                    else {
+                        console.log(data.Message);
+                    }
+                },
+                error: function (a, b, c) {
+                    console.log(b);
+                }
+            });
+        }
+
+        function LoadTopic() {
+            $(".view").empty();
+            $.ajax({
+                url: "../MeetingService.asmx/GetTopic",
+                type: "post",
+                data: { mid: mid },
+                success: function (data) {
+                    console.log(data);
+                    if (data.Result == "true") {
+                        $(data.Message).each(function (i, e) {
+                            var title = e.Title;
+                            var tid = e.Tid;
+                            var content = e.Content;
+                            var topic = { tid: tid, title: title, items: content };
+                            var html = "<div name='item' style='min-height: 110px; width: 95%; margin-top: 10px; margin-left: auto; margin-right: auto;border:1px solid silver;'>" +
+                                       "<div name='top' style='width:100%;height:80px;'><h4>议题：" + title + "</h4><br/><p>议题简介：</p><p>" + content + "</p></div>" +
+                                       "<div name='bottom' style='width:95%;height:25px;text-align:right;'>" +
+                                       "<input type='image' name='update" + i + "' src='../Images/Con_InteractUpdate.png'/>" +
+                                       "<input type='image' name='addItem' src='../Images/Con_InteractDelete.png' onclick='DeleteTopics(this,3," + tid + ")' />" +
+                                       "</div></div>";
+                            $(".view").append(html);
+                            $("input[name='update" + i + "']").click(function () {
+                                UpdateTopics(this, 3, topic);
+                            });
+                        });
+                    }
+                    else {
+                        console.log(data.Message);
+                    }
+                },
+                error: function (a, b, c) {
+                    console.log(b);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="_WallPaper1">
+        <div class="_div1">
+            <table>
+                <tr class="tr2">
+                    <td type="title">会议题库</td>
+                </tr>
+            </table>
+        </div>
+        <div class="_div2">
+            <table>
+                <tr>
+                    <td style="text-align: center; color: #ffffff; font-size: 18px;">
+                        <span id="title"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="_div3">
+            <div class="_div3_1">
+                <div class="beginTime"></div>
+                <div class="endTime"></div>
+                <div class="city"></div>
+            </div>
+            <div class="gride">
+                <div class="tr1" style="border-bottom: solid 1px silver; background-color: silver;">
+                    <table style="width: 100%; height: 100%;">
+                        <tr>
+                            <td id="title1" style="width: 100%; height: 100%;">现场互动题库</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="tr2">
+                    <div style="width: 90%; height: 8%; margin: 0px auto;">
+                        <table style="width: 100%; height: 100%">
+                            <tr>
+                                <td style="width: 100%; height: 100%;">
+                                    <input type="image" src="../Images/Con_Vote1.png" />
+                                    <input type="image" style="margin-left: 20px;" src="../Images/Con_Survey1.png" />
+                                    <!--<input type="image" style="margin-left: 20px;" src="../Images/Con_Topic1.png" />-->
+                                    <input type="image" style="float: right;" src="../Images/Con_Add.png" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="none" name="content" style="width: 90%; height: 90%; margin: 0px auto; border: 1px solid silver;">
+                        <div style="width: 100%; height: 10%; background-color: silver;">
+                            <table style="width: 100%; height: 100%;">
+                                <tr>
+                                    <td style="width: 100%; height: 100%;">
+                                        <p></p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="width: 100%; height: 90%; overflow: auto;">
+                            <div class="view" style="width: 99%; height: 99%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="_div4">
+            <input type="image" src="../Images/Con_Finish.png" style="float: right; margin-right: 20px;" />
+        </div>
+    </div>
+</body>
+</html>

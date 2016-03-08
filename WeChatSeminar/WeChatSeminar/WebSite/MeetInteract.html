@@ -14,9 +14,6 @@
             layer.load(2);
             Login();
             mid = GetQueryString("mid");
-            if (mid == null || mid == "") {
-                mid = 1;
-            }
             $.ajax({
                 url: "../WebService/WebService.asmx/GetMeetingById",
                 type: "post",
@@ -36,7 +33,20 @@
 
         //点击投票按钮
         function tp_click() {
-            window.location = "VoteListPage.html?mid=" + mid;
+            $.ajax({
+                url: "../WebService/WebService.asmx/VoteByMid",
+                type: "post",
+                data: { mid: mid },
+                success: function (r) {
+                    if (r != null && r.length > 0)
+                        window.location = "VoteListPage.html?mid=" + mid;
+                    else
+                        layer.msg('没有投票,或投票功能未开启', { icon: 10, time: 1000 });
+                },
+                error: function (r) {
+                    console.log(r.responseText);
+                }
+            });
         }
         //点击调研按钮---> //判断是否有调研
         function dy_click() {
@@ -105,7 +115,7 @@
 
             .centre .address {
                 background: url('Images/adres.png') no-repeat right center;
-                line-height: 3.5vh;
+                line-height: 4vh;
                 text-align: right;
                 font-size: 14px;
             }

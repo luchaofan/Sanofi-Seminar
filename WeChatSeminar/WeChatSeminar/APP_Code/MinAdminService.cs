@@ -113,7 +113,7 @@ namespace WeChatSeminar.APP_Code
         /// <returns></returns>
         public IList<Answer> GetMeetAnswers(int mid, int PageIndex, int PageSize)
         {
-            string sql = string.Format("select * from seminar_answer where mid='{0}' limit {1},{2}", mid, PageIndex, PageSize);
+            string sql = string.Format("select * from seminar_answer where mid='{0}' and state=1 limit {1},{2}", mid, PageIndex, PageSize);
             var aDt = DB_mysql.ExecuteQueryDT(sql);
             IList<Answer> ia = new List<Answer>();
             if (aDt.Rows.Count > 0)

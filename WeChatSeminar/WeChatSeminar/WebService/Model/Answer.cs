@@ -11,6 +11,6 @@ namespace WeChatSeminar.WebService.Model
         public string uid { get; set; }
         public int mid { get; set; }
         public string content { get; set; }
-        public string datatiem { get; set; }
+        public string datetime { get; set; }
     }
 }

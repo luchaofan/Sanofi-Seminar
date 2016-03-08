@@ -551,6 +551,7 @@
     <Content Include="MinAdmin\image\defaultConIconsV1.0.png" />
     <Content Include="MinAdmin\image\denglu.png" />
     <Content Include="MinAdmin\image\hengla.png" />
+    <Content Include="MinAdmin\image\lcf.jpg" />
     <Content Include="MinAdmin\image\logo.png" />
     <Content Include="MinAdmin\image\mima.png" />
     <Content Include="MinAdmin\image\qidong.png" />
@@ -566,6 +567,7 @@
     <Content Include="MinAdmin\login.aspx" />
     <Content Include="MinAdmin\MeetAnswers.aspx" />
     <Content Include="MinAdmin\MeetingListPage.aspx" />
+    <Content Include="MinAdmin\Answers.aspx" />
     <Content Include="MinAdmin\VoteDetailed.aspx" />
     <Content Include="MinAdmin\VoteListPage.aspx" />
     <Content Include="MinAdmin\VoteResultPage.aspx" />
@@ -611,6 +613,11 @@
     <Content Include="WebSite\Images\1.jpg" />
     <Content Include="WebSite\Images\275.png" />
     <Content Include="WebSite\Images\3.jpg" />
+    <Content Include="WebSite\Images\3_3.jpg" />
+    <Content Include="WebSite\Images\4.jpg" />
+    <Content Include="WebSite\Images\5.jpg" />
+    <Content Include="WebSite\Images\6.jpg" />
+    <Content Include="WebSite\Images\7.jpg" />
     <Content Include="WebSite\Images\会议资料背景.jpg" />
     <Content Include="WebSite\Images\6.png" />
     <Content Include="WebSite\Images\adres.png" />
@@ -682,6 +689,13 @@
     </Compile>
     <Compile Include="MinAdmin\StartSurveyOrTopic.ashx.cs">
       <DependentUpon>StartSurveyOrTopic.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="MinAdmin\Answers.aspx.cs">
+      <DependentUpon>Answers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MinAdmin\Answers.aspx.designer.cs">
+      <DependentUpon>Answers.aspx</DependentUpon>
     </Compile>
     <Compile Include="MinAdmin\VoteDetailed.aspx.cs">
       <DependentUpon>VoteDetailed.aspx</DependentUpon>

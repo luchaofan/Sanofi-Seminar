@@ -130,7 +130,7 @@ namespace WeChatSeminar.APP_Code
         /// <returns></returns>
         public int AddMeetAnswer(Answer a)
         {
-            string sql = string.Format("insert into seminar_answer (uid,mid,content,datatiem) values ('{0}','{1}','{2}',sysdate())", a.uid,a.mid,a.content);
+            string sql = string.Format("insert into seminar_answer (uid,mid,content,datetime) values ('{0}','{1}','{2}',sysdate())", a.uid, a.mid, a.content);
             return DB_mysql.ExecuteNonQuery(sql);
         }
     }

@@ -453,7 +453,8 @@ namespace WeChatSeminar.Admin
                         Directory.CreateDirectory(Server.MapPath("~/Admin/ErCode"));
                     }
                     string invite = string.Format("Is working hard to develop...");
-                    string signIn = string.Format("http://192.168.1.106:8026/website/MeetInteract.html?mid={0}", mid);
+                    //string signIn = string.Format("http://192.168.1.106:8026/website/MeetInteract.html?mid={0}", mid);
+                    string signIn = string.Format("http://www.ecache.cn/seminar/website/MeetInteract.html?mid={0}", mid);
                     string inviteUrl = CreateEnCode(invite);
                     string signInUrl = CreateEnCode(signIn);
                     bool res1 = ms.AddMeetingErCode(mid, inviteUrl, signInUrl);

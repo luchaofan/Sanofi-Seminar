@@ -11,6 +11,7 @@
         * {
             margin: 0;
             padding: 0;
+            color: #6d6464;
         }
 
         body {
@@ -24,7 +25,7 @@
             height: 784px;
             margin: 0 auto;
             position: relative;
-            background-image: url('image/Valentine_3V1.0.jpg');
+            background-image: url('image/lcf.jpg');
         }
 
         #ly {
@@ -53,10 +54,10 @@
         }
 
         ul li {
-            height: 144px;
+            height: 145px;
             background: rgba(255, 255, 255, 0.5);
             border-width: 1px;
-            border: 1px solid #fff;
+            border: 2px solid #fff;
             cursor: pointer;
             margin-bottom: 20px;
             font-size: 64px;
@@ -73,7 +74,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
-            color: #fff;
+            color: #281313;
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
         }
@@ -161,7 +162,7 @@
                     console.log(data);
                     var length = data.length;
                     $(data).each(function (i, e) {
-                        html += " <li  onclick=\"show(this)\"><p style=\"font-size:45px; padding:12px 0;\">" + this.uid + "</p><p class=\"_p\">" + this.content + "</P></li>";
+                        html += " <li  onclick=\"show(this)\"><p style=\"font-size:45px; padding:12px 0;\">" + this.uid + "</p><p class=\"_p\" style='color:#000;'>" + this.content + "</P></li>";
                     });
                     $("#ly").append(" <div class=\"block\">\
                                 <ul>\
@@ -174,8 +175,7 @@
                 }
             });
             if (html != "") {
-                _PageIndex = _PageSize;
-                _PageSize += _PageSize;
+                _PageIndex += _PageSize;
             }
         }
 
@@ -185,8 +185,8 @@
         var datalength = 0;
 
         function g() {
-            //console.log(_PageIndex);
-            //console.log(_PageSize);
+            console.log(_PageIndex);
+            console.log(_PageSize);
             var html = "";
             $.ajax({
                 url: "../WebService/WebService.asmx/GetMeetAnswers",
@@ -194,10 +194,10 @@
                 async: false,
                 data: { mid: GetQueryString("mid"), PageIndex: _PageIndex, PageSize: _PageSize },
                 success: function (data) {
-                    //console.log(data);
+                    console.log(data);
                     $(data).each(function (i, e) {
                         _commendlength = i;
-                        html += " <li  onclick=\"show(this)\"><p  style=\"font-size:45px; padding:12px 0;\">" + this.uid + "</p><p class=\"_p\">" + this.content + "</P></li>";
+                        html += " <li  onclick=\"show(this)\"><p  style=\"font-size:45px; padding:12px 0;\">" + this.uid + "</p><p class=\"_p\" style='color:#000;'>" + this.content + "</P></li>";
                     });
                     if (html != "") {
                         if ($(".block").length > 1) {
@@ -227,13 +227,11 @@
 
                         }
                         datalength = 0;
-                        _PageIndex = _PageSize;
-                        _PageSize += _PageSize;
+                        _PageIndex += _PageSize;
                     } else {
                         //没有数据了
                         //_PageIndex--;
                         _PageIndex = 0;
-                        _PageSize = 3;
                         //datalength = 1; //判断是否有数据  
                         //if ($(".block").length > 1) {
                         //    $(".block").eq(0).css({ "top": "-564px", "display": "block" }).addClass("_transition");
@@ -249,9 +247,7 @@
                     console.log(r.responseText);
                 }
             });
-
         }
-
 
         function show(obj) {
             $("p").removeClass("_p");
@@ -260,7 +256,6 @@
             $("#content").html($(obj).html());
             clearInterval(ds_gd);
         }
-
         $('#A1').click(function () {
             _PageIndex = 0;
             _PageSize = 3;

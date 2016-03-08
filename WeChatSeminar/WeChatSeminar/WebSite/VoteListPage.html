@@ -68,13 +68,17 @@
                 }
             });
         }
+
+        function go() {
+            window.location = "MeetInteract.html?mid=" + mid;
+        }
     </script>
     <style type="text/css">
         * {
             font-family: 微软雅黑;
         }
 
-         body {
+        body {
             margin: 0;
             padding: 0;
             overflow-x: hidden;
@@ -148,7 +152,7 @@
     <div class="include">
         <div class="top" style="position:relative;">
             <img />
-            <a style="position:absolute;top:20px;right:20px;background:url('Images/zy.png') no-repeat;width:30px;height:30px;background-size:contain;" href="MeetInteract.html"></a>
+            <a style="position:absolute;top:20px;right:20px;background:url('Images/zy.png') no-repeat;width:30px;height:30px;background-size:contain;" onclick="go()"></a>
         </div>
     </div>
 </body>

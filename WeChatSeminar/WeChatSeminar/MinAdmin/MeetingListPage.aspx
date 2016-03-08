@@ -183,6 +183,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="现场回答">
                             <ItemTemplate>
+                                <input type="button" value="审阅" onclick="javascript:window.location.href='Answers.aspx?mid=<%#Eval("mid") %>    '">
                                 <input type="button" value="查看" onclick="javascript:window.location.href='MeetAnswers.aspx?mid=<%#Eval("mid") %>    '">
                             </ItemTemplate>
                             <HeaderStyle VerticalAlign="Middle" Width="20%" />

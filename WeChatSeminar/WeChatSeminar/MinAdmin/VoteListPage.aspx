@@ -74,7 +74,7 @@
             border: 1px solid #cccccc;
             height: 470px;
             margin: 0px auto;
-            overflow-x:hidden;
+            overflow-x: hidden;
         }
 
         .content_top {
@@ -199,7 +199,7 @@
                         //    });
                         //}
                         $yanshi.click(function () {
-                            window.location = "VoteResultPage.aspx?vidlist=" + e.vid + "";
+                            window.location = "VoteHighcharts.html?vidlist=" + e.vid + "";
                         });
                         $content_black_title.html((k + 1) + "." + e.vtopic);
                         $content_black.append($content_black_title);

@@ -271,6 +271,15 @@
     <Content Include="Admin\Images\wenda.png" />
     <Content Include="Admin\Images\wenda1.png" />
     <Content Include="Admin\Index.html" />
+    <Content Include="Admin\Styles\layer\extend\layer.ext.js" />
+    <Content Include="Admin\Styles\layer\layer.js" />
+    <Content Include="Admin\Styles\layer\skin\default\icon-ext.png" />
+    <Content Include="Admin\Styles\layer\skin\default\icon.png" />
+    <Content Include="Admin\Styles\layer\skin\default\loading-0.gif" />
+    <Content Include="Admin\Styles\layer\skin\default\loading-1.gif" />
+    <Content Include="Admin\Styles\layer\skin\default\loading-2.gif" />
+    <Content Include="Admin\Styles\layer\skin\layer.css" />
+    <Content Include="Admin\Styles\layer\skin\layer.ext.css" />
     <Content Include="Admin\Styles\Login.css" />
     <Content Include="Admin\Login\Login.html" />
     <Content Include="Admin\UI\Login.js" />
@@ -569,6 +578,7 @@
     <Content Include="MinAdmin\MeetingListPage.aspx" />
     <Content Include="MinAdmin\Answers.aspx" />
     <Content Include="MinAdmin\VoteDetailed.aspx" />
+    <Content Include="MinAdmin\VoteHighcharts.html" />
     <Content Include="MinAdmin\VoteListPage.aspx" />
     <Content Include="MinAdmin\VoteResultPage.aspx" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -726,6 +736,7 @@
     <Compile Include="WebService\Model\Province.cs" />
     <Compile Include="WebService\Model\Survey.cs" />
     <Compile Include="WebService\Model\UserInfo.cs" />
+    <Compile Include="WebService\Model\UserISP.cs" />
     <Compile Include="WebService\Model\Vote.cs" />
     <Compile Include="WebService\Model\SurveyResult.cs" />
     <Compile Include="WebService\Model\VoteResult.cs" />
@@ -735,7 +746,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Styles\" />
   </ItemGroup>
   <PropertyGroup>

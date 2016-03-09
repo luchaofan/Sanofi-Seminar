@@ -171,6 +171,22 @@ namespace WeChatSeminar.WebService
                 Tools.Catch(res, ex);
             }
         }
+        [WebMethod(Description = "记录登录信息", EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void AddLoginLog(string uisp)
+        {
+            HttpResponse res = Context.Response;
+            res.ContentType = "application/json";
+            try
+            {
+                var ui = jss.Deserialize<UserISP>(uisp);
+                res.Write(ms.AddLoginLog(ui));
+            }
+            catch (Exception ex)
+            {
+                Tools.Catch(res, ex);
+            }
+        }
         #endregion
 
         #region 后台

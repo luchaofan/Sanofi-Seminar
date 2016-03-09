@@ -13,6 +13,24 @@
         $(function () {
             layer.load(2);
             Login();
+            //获取IP、地域
+            var url = 'http://chaxun.1616.net/s.php?type=ip&output=json&callback=?&_=' + Math.random();
+            $.getJSON(url, function (data) {
+                var _uisp = { Ip: data.Ip, Isp: data.Isp, Browser: data.Browser, OS: data.OS };
+                console.log(_uisp);
+                $.ajax({
+                    url: "../WebService/WebService.asmx/AddLoginLog",
+                    type: "post",
+                    data: { uisp: JSON.stringify(_uisp) },
+                    success: function (r) {
+                        console.log(r);
+                    },
+                    error: function (r) {
+                        console.log(r.responseText);
+                    }
+                });
+
+            });
             mid = GetQueryString("mid");
             $.ajax({
                 url: "../WebService/WebService.asmx/GetMeetingById",
@@ -93,7 +111,7 @@
             margin: 0 auto;
             width: 100vw;
             height: 100vh;
-            border: 1px solid rgb(244,246,127);
+            border: 0px solid rgb(244,246,127);
             max-width: 640px;
         }
 
@@ -115,7 +133,8 @@
 
             .centre .address {
                 background: url('Images/adres.png') no-repeat right center;
-                line-height: 4vh;
+                background-size:auto;
+                line-height: 6vh;
                 text-align: right;
                 font-size: 14px;
             }

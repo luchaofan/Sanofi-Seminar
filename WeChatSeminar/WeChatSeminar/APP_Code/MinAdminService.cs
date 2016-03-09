@@ -87,23 +87,11 @@ namespace WeChatSeminar.APP_Code
         }
         public IList<VoteResult> VoteResultByVid(int vid)
         {
-            string sql = string.Format("select * from seminar_vote_result where vid='{0}'", vid);
+            string sql = string.Format("select v.vtopic, v.vanswer,vr.* from seminar_vote v inner join seminar_vote_result vr on v.vid=vr.vid where vr.vid='{0}'", vid);
             var vDt = DB_mysql.ExecuteQueryDT(sql);
             IList<VoteResult> iv = new List<VoteResult>();
-            foreach (DataRow row in vDt.Rows)
-            {
-                VoteResult ro = new VoteResult()
-                {
-                    uid = row["uid"].ToString(),
-                    vdatetime = row["vdatetime"].ToString(),
-                    Votes = new MeetService().GetVoteById(Convert.ToInt32(row["vid"])),
-                    vresult = Convert.ToString(row["vresult"]).Trim(),
-                    vid = Convert.ToInt32(row["vid"]),
-                    vrid = Convert.ToInt32(row["vrid"])
-
-                };
-                iv.Add(ro);
-            }
+            if (vDt.Rows.Count > 0)
+                iv = Common<VoteResult>.Dt2List(vDt);
             return iv;
         }
         /// <summary>

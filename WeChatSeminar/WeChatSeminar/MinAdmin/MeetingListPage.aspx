@@ -139,7 +139,7 @@
                                 投票题
                             </HeaderTemplate>
                             <ItemTemplate>
-                                <input type="button" value="编辑" onclick="javascript:window.location.href='VoteListPage.aspx?mid=<%#Eval("mid") %>    '">
+                                <input type="button" value="查看投票结果" onclick="javascript:window.location.href='VoteHighcharts.html?mid=<%#Eval("mid") %>    '">
                             </ItemTemplate>
                             <FooterStyle Height="20px" />
                             <HeaderStyle VerticalAlign="Middle" Width="10%" />

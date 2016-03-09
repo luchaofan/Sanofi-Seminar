@@ -12,7 +12,8 @@ namespace WeChatSeminar.WebService.Model
         public int vid { get; set; }
         public string vresult { get; set; }
         public string vdatetime { get; set; }
-
+        public string vtopic { get; set; }
+        public string vanswer { get; set; }
         /// <summary>
         /// 投票集合
         /// </summary>

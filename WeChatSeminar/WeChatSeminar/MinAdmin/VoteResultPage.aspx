@@ -210,7 +210,7 @@
                         $(list).each(function (k, e) {
                             if (k == 0) {
                                 //分割答案字符串
-                                var strs = e.Votes.vanswer.split("|");
+                                var strs = e.vanswer.split("|");
                                 for (var i = 0; i < strs.length; i++) {
                                     //统计不同选择结果的人数
                                     var s = count(e.vid, strs[i]);

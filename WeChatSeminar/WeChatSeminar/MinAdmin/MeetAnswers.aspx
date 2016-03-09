@@ -12,6 +12,8 @@
             margin: 0;
             padding: 0;
             color: #6d6464;
+            font-family: 微软雅黑;
+            letter-spacing: 5px;
         }
 
         body {
@@ -19,13 +21,14 @@
         }
 
         .container {
-            border: 1px solid rgb(115,1,1);
+            border: 1px solid rgb(235,235,235);
             width: 100%;
             max-width: 1440px;
             height: 784px;
             margin: 0 auto;
             position: relative;
-            background-image: url('image/lcf.jpg');
+            /*background-image: url('image/lcf.jpg');*/
+            background-color: rgb(235,235,235);
         }
 
         #ly {
@@ -57,10 +60,10 @@
             height: 145px;
             background: rgba(255, 255, 255, 0.5);
             border-width: 1px;
-            border: 2px solid #fff;
+            border: 2px solid rgb(184,184,184);
             cursor: pointer;
             margin-bottom: 20px;
-            font-size: 64px;
+            font-size: 49px;
             padding: 10px;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -74,7 +77,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
-            color: #281313;
+            /*color: #281313;*/
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
         }
@@ -90,7 +93,7 @@
             padding: 10px 10px;
             overflow: auto;
             background: rgba(255, 255, 255, 0.5);
-            border: 1px solid #fff;
+            border: 1px solid rgb(184,184,184);
             display: none;
             color: #fff;
             position: relative;
@@ -162,7 +165,7 @@
                     console.log(data);
                     var length = data.length;
                     $(data).each(function (i, e) {
-                        html += " <li  onclick=\"show(this)\"><p style=\"font-size:45px; padding:12px 0;\">" + this.uid + "</p><p class=\"_p\" style='color:#000;'>" + this.content + "</P></li>";
+                        html += " <li  onclick=\"show(this)\"><p style=\"font-size:42px; padding:12px 0;\">" + "匿名：" + "</p><p class=\"_p\" style='color:#000;'>" + this.content + "</P></li>";
                     });
                     $("#ly").append(" <div class=\"block\">\
                                 <ul>\
@@ -197,7 +200,7 @@
                     console.log(data);
                     $(data).each(function (i, e) {
                         _commendlength = i;
-                        html += " <li  onclick=\"show(this)\"><p  style=\"font-size:45px; padding:12px 0;\">" + this.uid + "</p><p class=\"_p\" style='color:#000;'>" + this.content + "</P></li>";
+                        html += " <li  onclick=\"show(this)\"><p  style=\"font-size:42px; padding:12px 0;\">" + "匿名：" + "</p><p class=\"_p\" style='color:#000;'>" + this.content + "</P></li>";
                     });
                     if (html != "") {
                         if ($(".block").length > 1) {

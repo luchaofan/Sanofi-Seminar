@@ -1,5 +1,9 @@
-﻿
-var mid = location.href.split('?')[1].split('=')[1];
+﻿function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return r[2]; return null;
+}
+var mid = GetQueryString('mid');
 var formData = new FormData();
 $.ajaxSetup({ async: false });
 var number = 0;
@@ -170,6 +174,16 @@ function PageLoad() {
                 $("#button6").children("img:eq(0)").attr("src", url11);
                 $("#button8").children("img:eq(0)").attr("src", url15);
                 btn1_click();
+            }
+            if (GetQueryString('qrCode') == "1") {
+                $("#button1").children("img:eq(0)").attr("src", url1);
+                $("#button2").children("img:eq(0)").attr("src", url3);
+                $("#button3").children("img:eq(0)").attr("src", url5);
+                $("#button4").children("img:eq(0)").attr("src", url7);
+                $("#button5").children("img:eq(0)").attr("src", url9);
+                $("#button6").children("img:eq(0)").attr("src", url11);
+                $("#button8").children("img:eq(0)").attr("src", url16);
+                btn8_click();
             }
         },
         error: function (a, b, c) {

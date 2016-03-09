@@ -230,9 +230,6 @@
                         field: "mbegintime", title: "召开日期", width: $(this).width() * 0.1
 
                     },
-                    //{
-                    //    field: "Product", title: "产品组", width: $(this).width() * 0.1
-                    //},
                     {
                         field: "mgrade", title: "会议等级", width: $(this).width() * 0.15,
 
@@ -254,9 +251,17 @@
                         width: $(this).width() * 0.1
                     },
                     {
-                        field: "bb", title: "会议详情",
+                        field: "dd", title: "会议详情",
                         formatter: function (value, row, index) {
                             var html = "<a href='javascript:Redirect(\"MeetingDetails.html?mid=" + row.mid + "\")'><image src='../Images/Con_MeetDetalis.png' /></a>"
+                            return html;
+                        },
+                        width: $(this).width() * 0.1
+                    },
+                    {
+                        field: "bb", title: "查看二维码",
+                        formatter: function (value, row, index) {
+                            var html = "<a href='javascript:Redirect(\"MeetingDetails.html?mid=" + row.mid + "&qrCode=1\")'><image src='../Images/Con_MeetDetalis.png' /></a>"
                             return html;
                         },
                         width: $(this).width() * 0.1

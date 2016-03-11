@@ -307,9 +307,9 @@ namespace WeChatSeminar.APP_Code
 				new MySqlParameter("?city", m.mregion),
 				new MySqlParameter("?grade", m.mgrade),
 				new MySqlParameter("?address", m.msite),
-				new MySqlParameter("?introduction", m.mcontent),
-                new MySqlParameter("?mspot_banner","1.jpg"),
-                new MySqlParameter("?mhd_img", "1.jpg")
+                new MySqlParameter("?introduction", m.mcontent),
+                new MySqlParameter("?mspot_banner",m.mspot_banner),
+                new MySqlParameter("?mhd_img", m.mhd_img)
 			};
             string sql = "INSERT INTO seminar_meeting (mtitle,mcontent,mregion,mbegintime,mendtime,mgrade,mspot_banner,mhd_img,msite)VALUES(?title,?introduction,?city,?beTime,?edTime,?grade,?mspot_banner,?mhd_img,?address)";
             return DB_mysql.ExecuteNonQuery(sql, pa) > 0;

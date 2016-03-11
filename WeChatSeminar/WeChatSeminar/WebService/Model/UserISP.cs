@@ -8,6 +8,7 @@ namespace WeChatSeminar.WebService.Model
     public class UserISP
     {
         public int id { get; set; }
+        public int mid { get; set; }
         public string Ip { get; set; }
         public string Isp { get; set; }
         public string Browser { get; set; }

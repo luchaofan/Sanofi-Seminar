@@ -17,7 +17,7 @@ namespace WeChatSeminar.APP_Code
         /// <returns></returns>
         public int AddLoginLog(UserISP u)
         {
-            string sql = string.Format("insert into seminar_user_log (Ip,Isp,Browser,OS,CreateTime) values ('{0}','{1}','{2}','{3}',sysdate())", u.Ip, u.Isp, u.Browser, u.OS);
+            string sql = string.Format("insert into seminar_user_log (mid,Ip,Isp,Browser,OS,CreateTime) values ('{0}','{1}','{2}','{3}','{4}',sysdate())", u.mid, u.Ip, u.Isp, u.Browser, u.OS);
             return DB_mysql.ExecuteNonQuery(sql);
         }
 

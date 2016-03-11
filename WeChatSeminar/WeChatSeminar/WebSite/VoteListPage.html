@@ -18,7 +18,19 @@
                 type: "post",
                 data: { mid: mid },
                 success: function (r) {
-                    $(".top img").attr("src", "Images/" + r.mhd_img);
+                    if (r.mhd_img != null && r.mhd_img != "" && r.mhd_img != "_default.jpg")
+                        $(".top img").attr("src", "Images/" + r.mhd_img);
+                    else {
+                        $(".top img").attr("src", "Images/_default.jpg");
+                        $('.top div').html(r.mtitle);
+                    }
+                    if ($('.top div').height() <= 38) {
+                        $('.top div').css('top', '12vh');
+                    }
+                    if ($('.top div').html().length > 24) {
+                        $('.top div').html($('.top div').html().substr(0, 24));
+                    }
+                    $('.top div').css('left', (parseInt($('.top').width()) - parseInt($('.top div').width())) / 2 + "px");
                     layer.closeAll('loading');
                 },
                 error: function (r) {
@@ -33,7 +45,6 @@
             InitImg();
             Load();
         });
-
 
         function Load() {
             layer.load(2);
@@ -82,7 +93,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-             background-color: #f2f2f2;
+            background-color: #f2f2f2;
         }
 
         img {
@@ -156,6 +167,7 @@
 <body>
     <div class="include">
         <div class="top" style="position:relative;">
+            <div style="max-width:640px;text-align:center;font-size: 32px;color:#fff;font-family:'黑体';position:absolute;top:10vh;"></div>
             <img />
             <a style="position:absolute;top:20px;right:20px;background:url('Images/zy.png') no-repeat;width:30px;height:30px;background-size:contain;" onclick="go()"></a>
         </div>

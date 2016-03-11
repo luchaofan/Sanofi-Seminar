@@ -15,7 +15,7 @@
         body {
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
+            background-color: #f2f2f2;
         }
 
         img {
@@ -24,66 +24,172 @@
         }
 
         .include {
-            margin: 0 auto;
-            width: 100vw;
-            height: 100vh;
-            border: 0px solid rgb(244,246,127);
+            margin: 0px auto;
+            margin-top: 0px;
+            border: 1px #EEF3FA solid;
+            position: relative;
+            overflow: scroll;
+            color: #666666;
+            padding-bottom: 10px;
+            overflow: hidden;
             max-width: 640px;
-            text-align: center;
         }
 
-        #content {
-            -webkit-border-radius: 5px;
-            margin: 0 auto;
-            border: 1px solid rgb(195,232,246);
-            background: rgb(255,255,255);
-            overflow-x: hidden;
-        }
-
-        #title {
-            margin: 0 auto;
-            text-align: center;
-            padding: 5vh;
-            font-size: 14px;
-            font-weight: bold;
-            color: rgb(70,90,167);
-            border-bottom: 1px solid rgb(195,232,246);
-            letter-spacing: 3px;
-        }
-
-        ul {
-            width: 70vw;
-            margin: 3vh auto;
-            text-align: left;
-        }
-
-        li {
-            list-style: none;
-            color: rgb(161,161,161);
-            height: 4vh;
-            line-height: 4vh;
-            text-indent: 7vw;
-            background-image: url(Images/xuan.png);
-            background-position: left 50%;
+        .title {
+            width: 95%;
+            margin: 10px auto;
             background-repeat: no-repeat;
-            background-size: 10%;
-            padding: 10px;
-            font-size: 12px;
-            letter-spacing: 1px;
-            margin-top: 5vh;
-            margin-bottom: 4vh;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: inset 1px 1px 4px #d9d9d9;
+            -webkit-box-shadow: inset 1px 1px 4px #d9d9d9;
+            -moz-box-shadow: inset 1px 1px 4px #d9d9d9;
         }
 
-        input {
-            width: 25%;
-            background: url('Images/tjj.png') no-repeat center;
-            background-size: contain;
-            padding: 10px 0;
-            margin: 5vh;
-            margin-top: 3vh;
-            background-color: rgb(255, 255, 255);
-            border: none;
-            color: rgba(255, 255, 255,0);
+        .title_div {
+            margin: 0px auto;
+            padding: 1em;
+            line-height: 130%;
+        }
+
+        .vs {
+            width: 95%;
+            margin: 10px auto;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: inset 1px 1px 4px #d9d9d9;
+            -webkit-box-shadow: inset 1px 1px 4px #d9d9d9;
+            -moz-box-shadow: inset 1px 1px 4px #d9d9d9;
+        }
+
+        .log1 {
+            width: 30px;
+            height: 28px;
+            float: left;
+            margin: 13px;
+            background: url(images/s1.png) center no-repeat;
+            -webkit-background-size: 100%;
+        }
+
+        .log2 {
+            width: 30px;
+            height: 28px;
+            float: left;
+            margin: 13px;
+            background-image: url('images/s2.png');
+            -webkit-background-size: 100%;
+        }
+
+        .log3 {
+            width: 30px;
+            height: 28px;
+            float: left;
+            margin: 13px;
+            background-image: url('images/s3.png');
+            -webkit-background-size: 100%;
+        }
+
+        .log4 {
+            width: 30px;
+            height: 28px;
+            float: left;
+            margin: 13px;
+            background-image: url('images/s4.png');
+            -webkit-background-size: 100%;
+        }
+
+        .log5 {
+            width: 30px;
+            height: 28px;
+            float: left;
+            margin: 13px;
+            background-image: url('images/s5.png');
+            -webkit-background-size: 100%;
+        }
+
+        .log11 {
+            width: 30px;
+            height: 28px;
+            float: left;
+            margin: 13px;
+            background: url(images/11.png) center no-repeat;
+            -webkit-background-size: 100%;
+        }
+
+        .log22 {
+            width: 30px;
+            height: 28px;
+            float: left;
+            margin: 13px;
+            background-image: url('images/22.png');
+            -webkit-background-size: 100%;
+        }
+
+        .log33 {
+            width: 30px;
+            height: 28px;
+            float: left;
+            margin: 13px;
+            background-image: url('images/33.png');
+            -webkit-background-size: 100%;
+        }
+
+        .log44 {
+            width: 30px;
+            height: 28px;
+            float: left;
+            margin: 13px;
+            background-image: url('images/44.png');
+            -webkit-background-size: 100%;
+        }
+
+        .log55 {
+            width: 30px;
+            height: 28px;
+            float: left;
+            margin: 13px;
+            background-image: url('images/55.png');
+            -webkit-background-size: 100%;
+        }
+
+        .text {
+            font-size: 14px;
+            /*margin-top: 15px;*/
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+
+        .btn {
+            width: 20%;
+            margin: 0 auto;
+            max-width:100px;
+        }
+
+        .min_bg_title {
+            width: 100%;
+            height: 44px;
+            background: rgb(1, 102, 207);
+            color: #FFF;
+            font-size: 18px;
+            line-height: 44px;
+            text-align: center;
+            position: fixed;
+            top: 0px;
+            z-index: 3;
+        }
+
+            .min_bg_title a {
+                position: absolute;
+                left: 5px;
+                top: 8px;
+            }
+
+
+        #gg {
+            height: auto;
+            width: auto\9;
+            width: 100%;
         }
     </style>
 
@@ -98,7 +204,9 @@
             </div>
             <ul></ul>
         </div>
-        <input id="btn" type="button" value="提 交" />
+    </div>
+    <div class="btn">
+        <img id="tijiao" src="images/tijiao.png" width="138" height="138" />
     </div>
 </body>
 <script type="text/javascript">
@@ -108,6 +216,32 @@
     })
 
     //加载题目
+    //function LoadQ(vid) {
+    //    layer.load(2);
+    //    $.ajax({
+    //        url: "../WebService/WebService.asmx/VoteByVid",
+    //        type: "post",
+    //        data: { vid: vid },
+    //        success: function (r) {
+    //            console.log(r);
+    //            if (r != null) {
+    //                $('#title').html(r.vtopic);
+    //                $('#title').attr('qid', r.vid);
+    //                $('#title').attr('type', r.vtype);
+    //                var _Answers = r.vanswer.split('|');
+    //                _Answers.forEach(function (e, i) {
+    //                    $('#content ul').append(' <li onclick="_sel(this)">' + e + '</li>');
+    //                })
+    //            }
+    //            layer.closeAll('loading');
+    //        },
+    //        error: function (r) {
+    //            console.log(r.responseText);
+    //        }
+    //    });
+    //}
+
+
     function LoadQ(vid) {
         layer.load(2);
         $.ajax({
@@ -115,16 +249,85 @@
             type: "post",
             data: { vid: vid },
             success: function (r) {
-                console.log(r);
-                if (r != null) {
-                    $('#title').html(r.vtopic);
-                    $('#title').attr('qid', r.vid);
-                    $('#title').attr('type', r.vtype);
-                    var _Answers = r.vanswer.split('|');
-                    _Answers.forEach(function (e, i) {
-                        $('#content ul').append(' <li onclick="_sel(this)">' + e + '</li>');
-                    })
-                }
+                var list = r;
+                $(list).each(function (k, e) {
+                    //设置投票编号
+                    vid = e.vid;
+                    $title = $("<div qid=" + vid + ">").addClass("title");
+                    $title_div = $("<div>").addClass("title_div");
+                    $title_div.html(e.vtopic);
+                    $title.append($title_div);
+                    $(".include").append($title);
+                    //分割答案字符串
+                    var strs = e.vanswer.split("|");
+                    for (var i = 0; i < strs.length; i++) {
+                        $max_vs = $("<div>").addClass("max_vs");
+                        $vs = $("<div>").addClass("vs").attr("id", "id" + i).attr("select", "0").attr("img", (i + 1));;
+                        $log = $("<div>").addClass("log" + (i + 1)).attr("id", "id" + i).attr("select", "0")
+                        $text = $("<div>").addClass("text");
+                        $text.html($.trim(strs[i]));
+                        $vs.append($log);
+                        $vs.append($text);
+                        $(".include").append($vs);
+                        if (e.vtype == 1) {//多选
+                            $vs.toggle(function () {
+                                //background:#f2f2f2;
+                                $(this).css("color", "#FFF").css("background", "#0065b5").attr("select", 1);
+                                var img = $(this).attr("img");
+                                if (img == 1) {
+                                    $("div:first", this).addClass("log11");
+                                }
+                                if (img == 2) {
+                                    $("div:first", this).addClass("log22");
+                                }
+                                if (img == 3) {
+                                    $("div:first", this).addClass("log33");
+                                }
+                                if (img == 4) {
+                                    $("div:first", this).addClass("log44");
+                                }
+                                if (img == 5) {
+                                    $("div:first", this).addClass("log55");
+                                }
+
+                            }, function () {
+                                $(this).css("color", "#666666").css("background", "#fff").attr("select", 0);
+                                var img = $(this).attr("img");
+                                $("div:first", this).removeClass("log" + img + img);
+                            });
+                        } else {
+                            //单选
+                            $vs.click(function () {
+                                $(".vs").each(function (i, e) {
+                                    if (i == 0) {
+                                        $(e).css("color", "#666666").css("background", "#fff").attr("select", 0);
+                                        $("div:first", e).removeClass("log11");
+                                    }
+                                    if (i == 1) {
+                                        $(e).css("color", "#666666").css("background", "#fff").attr("select", 0);
+                                        $("div:first", e).removeClass("log22");
+                                    }
+                                    if (i == 2) {
+                                        $(e).css("color", "#666666").css("background", "#fff").attr("select", 0);
+                                        $("div:first", e).removeClass("log33");
+                                    }
+                                    if (i == 3) {
+                                        $(e).css("color", "#666666").css("background", "#fff").attr("select", 0);
+                                        $("div:first", e).removeClass("log44");
+                                    }
+                                    if (i == 4) {
+                                        $(e).css("color", "#666666").css("background", "#fff").attr("select", 0);
+                                        $("div:first", e).removeClass("log55");
+
+                                    }
+                                });
+                                $(this).css("color", "#fff").css("background", "#0065b5").attr("select", 1);
+                                var img = $(this).attr("img");
+                                $("div:first", this).addClass("log" + img + img);
+                            });
+                        }
+                    }
+                });
                 layer.closeAll('loading');
             },
             error: function (r) {
@@ -132,34 +335,37 @@
             }
         });
     }
-    function _sel(obj) {
-        if ($('#title').attr("type") == '0') { //单选
-            if ($(obj).css("background-image").indexOf("press") == -1) {
-                $(obj).css("background-image", "url(Images/xuan_press.png)");
-                $(obj).attr('select', 'select');
-                $(obj).siblings().removeAttr('select');
-                $(obj).siblings().css("background-image", "url(Images/xuan.png)");
-            }
-            else {
-                $(obj).css("background-image", "url(Images/xuan.png)");
-            }
-        }
-        else {//多选
-            if ($(obj).css("background-image").indexOf("press") == -1) {
-                $(obj).css("background-image", "url(Images/xuan_press.png)");
-                $(obj).attr('select', 'select');
-            }
-            else {
-                $(obj).css("background-image", "url(Images/xuan.png)");
-                $(obj).removeAttr('select');
-            }
-        }
-    };
-    $('#btn').click(function () {
+
+
+
+    //function _sel(obj) {
+    //    if ($('#title').attr("type") == '0') { //单选
+    //        if ($(obj).css("background-image").indexOf("press") == -1) {
+    //            $(obj).css("background-image", "url(Images/xuan_press.png)");
+    //            $(obj).attr('select', 'select');
+    //            $(obj).siblings().removeAttr('select');
+    //            $(obj).siblings().css("background-image", "url(Images/xuan.png)");
+    //        }
+    //        else {
+    //            $(obj).css("background-image", "url(Images/xuan.png)");
+    //        }
+    //    }
+    //    else {//多选
+    //        if ($(obj).css("background-image").indexOf("press") == -1) {
+    //            $(obj).css("background-image", "url(Images/xuan_press.png)");
+    //            $(obj).attr('select', 'select');
+    //        }
+    //        else {
+    //            $(obj).css("background-image", "url(Images/xuan.png)");
+    //            $(obj).removeAttr('select');
+    //        }
+    //    }
+    //};
+    $('#tijiao').click(function () {
         var _select = [];
-        $('li').each(function (i, k) {
-            if ($(k).css("background-image").indexOf("press") > -1) {
-                _select.push($(k).html());
+        $('.vs').each(function (i, k) {
+            if ($(k).attr('select') == 1) {
+                _select.push($(k).find(".text").html());
             }
         });
         if (_select.length <= 0) {
@@ -170,7 +376,7 @@
             return;
         }
         //保存选中
-        var _QAnswer = { uid: user.OpenID, vid: $('#title').attr('qid'), vresult: _select.toString().replace(/\,/g, "|") };
+        var _QAnswer = { uid: user.OpenID, vid: $('.title').attr('qid'), vresult: _select.toString().replace(/\,/g, "|") };
         console.log(_QAnswer);
         $(this).attr("disabled", "disabled");
         layer.msg('提交中...', { icon: 16 });

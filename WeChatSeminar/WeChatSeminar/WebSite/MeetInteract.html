@@ -8,7 +8,7 @@
     <script src="../Scripts/layer/layer.js"></script>
     <script src="../Scripts/public.js"></script>
     <script type="text/javascript">
-        var mid;
+        var mid = GetQueryString("mid");
         //加载标题img
         $(function () {
             layer.load(2);
@@ -16,29 +16,41 @@
             //获取IP、地域
             var url = 'http://chaxun.1616.net/s.php?type=ip&output=json&callback=?&_=' + Math.random();
             $.getJSON(url, function (data) {
-                var _uisp = { Ip: data.Ip, Isp: data.Isp, Browser: data.Browser, OS: data.OS };
+                var _uisp = { mid: mid, Ip: data.Ip, Isp: data.Isp, Browser: data.Browser, OS: data.OS };
                 console.log(_uisp);
                 $.ajax({
                     url: "../WebService/WebService.asmx/AddLoginLog",
                     type: "post",
                     data: { uisp: JSON.stringify(_uisp) },
                     success: function (r) {
-                        console.log(r);
+                        // console.log(r);
                     },
                     error: function (r) {
-                        console.log(r.responseText);
+                        // console.log(r.responseText);
                     }
                 });
-
             });
-            mid = GetQueryString("mid");
+
             $.ajax({
                 url: "../WebService/WebService.asmx/GetMeetingById",
                 type: "post",
                 data: { mid: mid },
                 success: function (r) {
                     console.log(r);
-                    $(".top img").attr("src", "Images/" + r.mspot_banner);
+                    if (r.mspot_banner != null && r.mspot_banner != "" && r.mspot_banner != "_default.jpg")
+                        $(".top img").attr("src", "Images/" + r.mspot_banner);
+                    else {
+                        $(".top img").attr("src", "Images/_default.jpg");
+                        $('.top div').html(r.mtitle);
+                    }
+
+                    if ($('.top div').height() <= 38) {
+                        $('.top div').css('top', '12vh');
+                    }
+                    if ($('.top div').html().length > 24) {
+                        $('.top div').html($('.top div').html().substr(0, 24));
+                    }
+                    $('.top div').css('left', (parseInt($('.top').width()) - parseInt($('.top div').width())) / 2 + "px");
                     $(".centre .date").html("日期：<b>" + r.mbegintime.substr(0, r.mbegintime.indexOf(" ")) + "(" + r.mbegintime.substr(r.mbegintime.indexOf(" ")) + ")</b>");
                     $(".centre .address div").html("地点：" + r.msite).css("margin-right", "30px");
                     layer.closeAll('loading');
@@ -133,7 +145,7 @@
 
             .centre .address {
                 background: url('Images/adres.png') no-repeat right center;
-                background-size:auto;
+                background-size: auto;
                 line-height: 6vh;
                 text-align: right;
                 font-size: 14px;
@@ -199,7 +211,8 @@
 </head>
 <body>
     <div class="include">
-        <div class="top">
+        <div class="top" style="position:relative;">
+            <div style="max-width:640px;text-align:center;font-size: 32px;color:#fff;font-family:'黑体';position:absolute;top:10vh;"></div>
             <img />
         </div>
         <div class="centre">
